@@ -50,7 +50,7 @@ To develop this website locally;
 
 2. Install the required npm packages:
 ```
-// Browse to the clined repo
+// Browse to the cloned repo
 cd 'c:/where-you-cloned-the-reopo/'
 
 // Install
