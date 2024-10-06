@@ -12,7 +12,7 @@ Here's what I came up with:
 1. **Keep it simple.**\
 This is a small static website, so no need to overdo the tooling.\
 Create it using `HTML`, `SASS` and `Javascript` only.\
-Use only the required basic npm packages for compilation and minification.
+Use only the required basic `npm` packages for compilation and minification.
 
 2. **Build everything yourself.**\
 This website serves to showcase your skills as a developer.\
