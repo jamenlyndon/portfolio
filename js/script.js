@@ -415,20 +415,8 @@ To use these simply add the following classes to any HTML element:
 */
 // Init
 function entryAnimations_init() {
-	// Delay the start time
-	let delay = 750;
-
-	// If we're on the homepage
-	if (window.location.pathname === '' || window.location.pathname === '/') {
-		// Delay a little less if we're already scrolled down the page on load
-		// This is set automatically by the browser from time to time
-		if (window.scrollY > 0) {
-			delay = 200;
-		}
-	}
-
-	// Delay
-	setTimeout(entryAnimations_update, delay);
+	// Delay for fade in
+	setTimeout(entryAnimations_update, 200);
 }
 
 // Update
