@@ -138,6 +138,19 @@ function nav_restorePageState() {
 
 	// Disable all isotopes
 	isotopes_disableAll();
+
+	// Show the header instantly if we've scrolled past the banner
+	const header = document.querySelector('header');
+	const banner = document.querySelector('section#banner');
+	if ((window.scrollY + header.offsetHeight) >= banner.offsetHeight) {
+		const transition = header.style.transition;
+		header.style.transition = 'none';
+		header.classList.add('visible');
+
+		window.requestAnimationFrame(function() {
+			header.style.transition = transition;
+		});
+	}
 }
 
 

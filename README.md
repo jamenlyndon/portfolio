@@ -142,7 +142,6 @@ This should help to explain where everything is and what it does.
 
 /* Other
 -------------------------------------------------- */
-
 // Git ignore
 .gitignore
 
