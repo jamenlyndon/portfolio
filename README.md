@@ -71,8 +71,8 @@ npm run watch
 Here's an overview of the directory and file structure.\
 This should help to explain where everything is and what it does.
 ```
-// SASS and compiled CSS
---------------------------------------------------
+/* SASS and compiled CSS
+-------------------------------------------------- */
 /css/
   // All SASS
   style.scss ( -> style.css )
@@ -95,16 +95,15 @@ This should help to explain where everything is and what it does.
     _variables.scss
 
 
-
-// Javascript
---------------------------------------------------
+/* Javascript
+-------------------------------------------------- */
 /js/
   // All Javascript
   script.js  ( -> script.min.js )
 
 
-// Images
---------------------------------------------------
+/* Images
+-------------------------------------------------- */
 /img/
   // The favicon in all sizes
   /favicon/
@@ -118,19 +117,19 @@ This should help to explain where everything is and what it does.
   *.png
 
 
-// Fonts
---------------------------------------------------
+/* Fonts
+-------------------------------------------------- */
 /fonts/
 
 
-// UI Kit page
---------------------------------------------------
+/* UI Kit page
+-------------------------------------------------- */
 /uikit/
   index.html
 
 
-// Projects
---------------------------------------------------
+/* Projects
+-------------------------------------------------- */
 /project/
   // Containing folder for each project
   /some-project/
@@ -141,8 +140,8 @@ This should help to explain where everything is and what it does.
     /img/
 
 
-Other
---------------------------------------------------
+/* Other
+-------------------------------------------------- */
 
 // Git ignore
 .gitignore
@@ -161,6 +160,7 @@ package-lock.json
 ## Wrapping up
 That's it! I hope you enjoyed this little overview of the codebase.
 
-If you have any questions you can get in touch with me via:\
+If you have any questions you can get in touch with me via:
+
 e. jamenlyndon@gmail.com\
 p. 0438 474 681
