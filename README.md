@@ -32,7 +32,7 @@ Link to GitHub and show the source code. Make sure it's neat!
 **So how did it go?**\
 Overall this project went pretty well and I managed to follow my guidelines for the most part. The entire thing was both designed and developed in under a week without complication or issue.
 
-I did end up using one off the shelf package, [Isotope](https://isotope.metafizzy.co/). This allowed me to do some fancy animated filtering. It does feel a bit like cheating, but writing this from scratch would have been extremely difficult and time consuming. Maybe one day...
+I did end up using one off the shelf package, [Isotope](https://isotope.metafizzy.co/). This allowed me to do some fancy animated filtering. It does feel a bit like cheating, but writing that feature from scratch would have been extremely difficult and time consuming. Maybe one day...
 
 The codebase is very neat. It's simple, maintainable, well commented, easy to read, has good separation of concerns, etc.
 
