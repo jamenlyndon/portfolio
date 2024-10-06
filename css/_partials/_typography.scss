@@ -1,0 +1,632 @@
+/* Fonts
+---------------------------------------------------------------------------------------------------- */
+// Product Sans
+
+// Light
+@font-face {
+	font-family: 'Product Sans';
+	font-weight: $font-weight-light;
+	src: url('../fonts/ProductSans-Light.woff2');
+}
+
+// Light Italic
+@font-face {
+	font-family: 'Product Sans';
+	font-weight: $font-weight-light;
+	font-style: italic;
+	src: url('../fonts/ProductSans-LightItalic.woff2');
+}
+
+// Regular
+@font-face {
+	font-family: 'Product Sans';
+	font-weight: $font-weight-regular;
+	src: url('../fonts/ProductSans-Regular.woff2');
+}
+
+// Medium
+@font-face {
+	font-family: 'Product Sans';
+	font-weight: $font-weight-medium;
+	src: url('../fonts/ProductSans-Medium.woff2');
+}
+
+// Bold
+@font-face {
+	font-family: 'Product Sans';
+	font-weight: $font-weight-bold;
+	src: url('../fonts/ProductSans-Bold.woff2');
+}
+
+
+/* Mixins
+----------------------------------------------------------------------------------------------------
+The below mixins use an innovate system I invented to remove the unwanted top and bottom padding from our typography
+With this system, all typography aligns to the ascender and baseline of the font (exact to the pixel)
+*/
+@mixin font-base {
+	display: table;
+	font-family: $font-family;
+
+	&::before {
+		content: '';
+		// Use display block here, it fixes a Firefox issue
+		display: block;
+	}
+
+	&::after {
+		content: '';
+		display: table;
+	}
+}
+
+@mixin font-h1($gap: true, $responsive: true, $inheritWeight: false) {
+	@include font-base;
+	font-size: 60px;
+	line-height: 1.1em;
+
+	@if not $inheritWeight {
+		font-weight: $font-weight-medium;
+
+		strong {
+			font-weight: $font-weight-bold;
+		}
+	}
+
+	&::before {
+		margin-top: -11px;
+	}
+
+	&::after {
+		margin-bottom: -12px;
+	}
+
+	@if $gap {
+		padding-bottom: $gap-4;
+	}
+
+	// Link styles
+	a {
+		@if not $inheritWeight {
+			font-weight: $font-weight-bold;
+		}
+
+		&::after {
+			bottom: 4px;
+			height: 4px;
+		}
+	}
+
+	@if $responsive {
+		@media (max-width: $breakpoint-l) {
+			font-size: 48px;
+
+			&::before {
+				margin-top: -9px;
+			}
+
+			&::after {
+				margin-bottom: -9px;
+			}
+
+			// Link styles
+			a {
+				@if not $inheritWeight {
+					font-weight: $font-weight-bold;
+				}
+
+				&::after {
+					bottom: 3px;
+					height: 3px;
+				}
+			}
+		}
+	}
+}
+
+@mixin font-h2($gap: true, $responsive: true, $inheritWeight: false) {
+	@include font-base;
+	font-size: 48px;
+	line-height: 1.1em;
+
+	@if not $inheritWeight {
+		font-weight: $font-weight-bold;
+
+		strong {
+			font-weight: $font-weight-black;
+		}
+	}
+
+	&::before {
+		margin-top: -9px;
+	}
+
+	&::after {
+		margin-bottom: -9px;
+	}
+
+	@if $gap {
+		padding-bottom: $gap-4;
+	}
+
+	// Link styles
+	a {
+		@if not $inheritWeight {
+			font-weight: $font-weight-black;
+		}
+
+		&::after {
+			bottom: 3px;
+			height: 3px;
+		}
+	}
+
+	@if $responsive {
+		@media (max-width: $breakpoint-l) {
+			@include font-h3($gap: $gap,  $responsive: false, $inheritWeight: true);
+		}
+	}
+}
+
+@mixin font-h3($gap: true, $responsive: true, $inheritWeight: false) {
+	@include font-base;
+	font-size: 40px;
+	line-height: 1.1em;
+
+	@if not $inheritWeight {
+		font-weight: $font-weight-bold;
+
+		strong {
+			font-weight: $font-weight-black;
+		}
+	}
+
+	&::before {
+		margin-top: -7px;
+	}
+
+	&::after {
+		margin-bottom: -8px;
+	}
+
+	@if $gap {
+		padding-bottom: $gap-3-5;
+	}
+
+	// Link styles
+	a {
+		@if not $inheritWeight {
+			font-weight: $font-weight-bold;
+		}
+
+		&::after {
+			bottom: 2px;
+			height: 3px;
+		}
+	}
+
+	@if $responsive {
+		@media (max-width: $breakpoint-l) {
+			@include font-h4($gap: $gap, $responsive: false, $inheritWeight: true);
+
+			// Link styles (overrides the responsive default styles defined in the font-h3 mixin)
+			a {
+				&::after {
+					bottom: 2px;
+					height: 3px;
+				}
+			}
+		}
+	}
+}
+
+@mixin font-h4($gap: true, $responsive: true, $inheritWeight: false) {
+	@include font-base;
+	font-size: 36px;
+	line-height: 1.1em;
+
+	@if not $inheritWeight {
+		font-weight: $font-weight-light;
+
+		strong {
+			font-weight: $font-weight-regular;
+		}
+	}
+
+	&::before {
+		margin-top: -6px;
+	}
+
+	&::after {
+		margin-bottom: -8px;
+	}
+
+	@if $gap {
+		padding-bottom: $gap-3;
+	}
+
+	// Link styles
+	a {
+		@if not $inheritWeight {
+			font-weight: $font-weight-regular;
+		}
+
+		&::after {
+			bottom: 2px;
+			height: 2px;
+		}
+	}
+
+	@if $responsive {
+		@media (max-width: $breakpoint-l) {
+			@include font-h5($gap: $gap, $responsive: false, $inheritWeight: true);
+		}
+	}
+}
+
+@mixin font-h5($gap: true, $responsive: true, $inheritWeight: false) {
+	@include font-base;
+	font-size: 32px;
+	line-height: 1.1em;
+
+	@if not $inheritWeight {
+		font-weight: $font-weight-regular;
+
+		strong {
+			font-weight: $font-weight-medium;
+		}
+	}
+
+	&::before {
+		margin-top: -6px;
+	}
+
+	&::after {
+		margin-bottom: -6px;
+	}
+
+	// Link styles
+	a {
+		@if not $inheritWeight {
+			font-weight: $font-weight-bold;
+		}
+
+		&::after {
+			bottom: 2px;
+			height: 2px;
+		}
+	}
+
+	@if $gap {
+		padding-bottom: $gap-3;
+	}
+
+	@if $responsive {
+		@media (max-width: $breakpoint-l) {
+			@include font-h6($gap: $gap, $responsive: false, $inheritWeight: true);
+		}
+	}
+}
+
+@mixin font-h6($gap: true, $responsive: true, $inheritWeight: false) {
+	@include font-base;
+	font-size: 28px;
+	line-height: 1.1em;
+
+	@if not $inheritWeight {
+		font-weight: $font-weight-regular;
+		letter-spacing: 0.02em;
+
+		strong {
+			font-weight: $font-weight-medium;
+		}
+	}
+
+	&::before {
+		margin-top: -5px;
+	}
+
+	&::after {
+		margin-bottom: -6px;
+	}
+
+	@if $gap {
+		padding-bottom: $gap-3;
+	}
+
+	// Link styles
+	a {
+		@if not $inheritWeight {
+			font-weight: $font-weight-regular;
+		}
+
+		&::after {
+			bottom: 2px;
+			height: 2px;
+		}
+	}
+
+	@if $responsive {
+		@media (max-width: $breakpoint-l) {
+			@include font-body-xxl($gap: $gap, $responsive: false, $inheritWeight: true);
+		}
+	}
+}
+
+@mixin font-body-xxl($gap: true, $responsive: true, $inheritWeight: false) {
+	@include font-base;
+	font-size: 24px;
+	line-height: 1.1em;
+
+	@if not $inheritWeight {
+		font-weight: $font-weight-light;
+
+		strong {
+			font-weight: $font-weight-regular;
+		}
+	}
+
+	&::before {
+		margin-top: -4px;
+	}
+
+	&::after {
+		margin-bottom: -5px;
+	}
+
+	@if $gap {
+		padding-bottom: $gap-3;
+	}
+
+	// Link styles
+	a {
+		@if not $inheritWeight {
+			font-weight: $font-weight-regular;
+		}
+
+		&::after {
+			bottom: 1px;
+			height: 2px;
+		}
+	}
+
+	@if $responsive {
+		@media (max-width: $breakpoint-l) {
+			font-size: 22px;
+
+			&::before {
+				margin-top: -3px;
+			}
+
+			&::after {
+				margin-bottom: -5px;
+			}
+
+			@if $gap {
+				padding-bottom: $gap-3;
+			}
+		}
+	}
+}
+
+@mixin font-body-xl($gap: true, $responsive: true, $inheritWeight: false) {
+	@include font-base;
+	font-size: 20px;
+	line-height: 1.2em;
+
+	@if not $inheritWeight {
+		font-weight: $font-weight-regular;
+
+		strong {
+			font-weight: $font-weight-medium;
+		}
+	}
+
+	&::before {
+		margin-top: -5px;
+	}
+
+	&::after {
+		margin-bottom: -5px;
+	}
+
+	@if $gap {
+		padding-bottom: $gap-3-5;
+	}
+
+	// Link styles
+	a {
+		@if not $inheritWeight {
+			font-weight: $font-weight-medium;
+		}
+
+		&::after {
+			bottom: 2px;
+			height: 2px;
+		}
+	}
+}
+
+@mixin font-body-l($gap: true, $responsive: true, $inheritWeight: false) {
+	@include font-base;
+	font-size: 18px;
+	line-height: 1.2em;
+
+	@if not $inheritWeight {
+		font-weight: $font-weight-regular;
+
+		strong {
+			font-weight: $font-weight-medium;
+		}
+	}
+
+	&::before {
+		margin-top: -3px;
+	}
+
+	&::after {
+		margin-bottom: -5px;
+	}
+
+	@if $gap {
+		padding-bottom: $gap-3-5;
+	}
+
+	// Link styles
+	a {
+		@if not $inheritWeight {
+			font-weight: $font-weight-medium;
+		}
+
+		&::after {
+			bottom: 2px;
+			height: 2px;
+		}
+	}
+}
+
+@mixin font-body-m($gap: true, $responsive: true, $inheritWeight: false) {
+	@include font-base;
+	font-size: 16px;
+	line-height: 1.2em;
+
+	@if not $inheritWeight {
+		font-weight: $font-weight-regular;
+
+		strong {
+			font-weight: $font-weight-medium;
+		}
+	}
+
+	&::before {
+		margin-top: -4px;
+	}
+
+	&::after {
+		margin-bottom: -4px;
+	}
+
+	@if $gap {
+		padding-bottom: $gap-3;
+	}
+
+	// Link styles
+	a {
+		@if not $inheritWeight {
+			font-weight: $font-weight-medium;
+		}
+
+		&::after {
+			bottom: 2px;
+			height: 1px;
+		}
+	}
+}
+
+@mixin font-body-s($gap: true, $responsive: true, $inheritWeight: false) {
+	@include font-base;
+	font-size: 14px;
+	line-height: 1.2em;
+	letter-spacing: 0.02em;
+
+	@if not $inheritWeight {
+		font-weight: $font-weight-regular;
+
+		strong {
+			font-weight: $font-weight-medium;
+		}
+	}
+
+	&::before {
+		margin-top: -2px;
+	}
+
+	&::after {
+		margin-bottom: -5px;
+	}
+
+	@if $gap {
+		padding-bottom: $gap-2;
+	}
+
+	// Link styles
+	a {
+		@if not $inheritWeight {
+			font-weight: $font-weight-medium;
+		}
+
+		&::after {
+			bottom: 3px;
+			height: 1px;
+		}
+	}
+}
+
+
+/* Apply typography mixins to HTML tags
+---------------------------------------------------------------------------------------------------- */
+h1,
+.font-h1 {
+	@include font-h1;
+}
+
+h2,
+.font-h2 {
+	@include font-h2;
+}
+
+h3,
+.font-h3 {
+	@include font-h3;
+}
+
+h4,
+.font-h4 {
+	@include font-h4;
+}
+
+h5,
+.font-h5 {
+	@include font-h5;
+}
+
+h6,
+.font-h6 {
+	@include font-h6;
+}
+
+.font-body-xxl {
+	@include font-body-xxl;
+}
+
+.font-body-xl {
+	@include font-body-xl;
+}
+
+.font-body-l {
+	@include font-body-l;
+}
+
+.font-body-m {
+	@include font-body-m;
+}
+
+.font-body-s {
+	@include font-body-s;
+}
+
+
+/* Add some very basic styling for lists
+---------------------------------------------------------------------------------------------------- */
+ul,
+ol {
+	margin-left: $gap-3;
+
+	li {
+		margin-bottom: $gap-1;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
