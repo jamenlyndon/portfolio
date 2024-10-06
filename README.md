@@ -1,34 +1,44 @@
 # Jamen Lyndon - Portfolio
 
 Hello and welcome to the source code of my portfolio!
+
 https://jamenlyndon.com/
 
 ## Overview
-Before starting on this website, I decided to create a few basic guidelines for myself.
+Before starting on this website I decided to create a few basic guidelines for myself.
 
-Here's the guidelines I set for myself at the start of this project:
+Here's what I came up with:
 
 1. **Keep it simple.**
+
 This is a small static website, so no need to overdo the tooling.
+
 Create it using `HTML`, `SASS` and `Javascript` only.
+
 Use only the required basic npm packages for compilation and minification.
 
-1. **Build everything yourself.**
+2. **Build everything yourself.**
+
 This website serves to showcase your skills as a developer.
+
 Make it from scratch and take as little off the shelf as possible.
 
-1. **Create a UI kit.**
+3. **Create a UI kit.**
+
 Make a basic UI Kit page to show components / typography.
 
-1. **Make it fancy.**
+4. **Make it cool.**
+
 Make this website a little more shiny and fun than you otherwise would.
+
 Create some animations, easter eggs, etc.
 
-1. **Showcase your code.**
+5. **Showcase your code.**
 Link to GitHub and show the source code. Make sure it's neat!
 
 
 **So how did it go?**
+
 Overall this project went very well. I managed to the guidelines for the most part. This project was both designed and developed in under a week without complication or issue.
 
 I ended up using one off the shelf package, [Isotope](https://isotope.metafizzy.co/). This allowed me to do some fancy animated filtering. Writing this from scratch would have been extremely difficult and time consuming. Maybe one day...
@@ -38,6 +48,7 @@ The codebase came out very neat and maintainable. It's simple, maintainable, wel
 The only caveat is that without a server side language to dynamically include files, I had to repeat myself in the HTML a little bit. Small price to pay for not using Python or PHP at all.
 
 The UI Kit was created too. Nothing much there, just some buttons and the typography. Turned out to be quite a useful reference while developing. You can view it here:
+
 https://jamenlyndon.com/uikit/
 
 Overall it came together well. Hopefully it will stay online in its current state for the next few years at least.
@@ -71,6 +82,7 @@ Here's an overview of the directory and file structure.
 This should help to explain where everything is and what it does.
 ```
 // SASS and compiled CSS
+--------------------------------------------------
 /css/
   // All SASS
   style.scss ( -> style.css )
@@ -92,16 +104,17 @@ This should help to explain where everything is and what it does.
     // Variables
     _variables.scss
 
---------------------------------------------------
+
 
 // Javascript
+--------------------------------------------------
 /js/
   // All Javascript
   script.js  ( -> script.min.js )
 
---------------------------------------------------
 
 // Images
+--------------------------------------------------
 /img/
   // The favicon in all sizes
   /favicon/
@@ -114,20 +127,18 @@ This should help to explain where everything is and what it does.
   *.svg
   *.png
 
---------------------------------------------------
 
 // Fonts
+--------------------------------------------------
 /fonts/
 
---------------------------------------------------
-
 // UI Kit page
+--------------------------------------------------
 /uikit/
   index.html
 
---------------------------------------------------
-
 // Projects
+--------------------------------------------------
 /project/
   // Containing folder for each project
   /some-project/
@@ -137,6 +148,8 @@ This should help to explain where everything is and what it does.
     // Images for the project
     /img/
 
+
+Other
 --------------------------------------------------
 
 // Git ignore
@@ -157,5 +170,7 @@ package-lock.json
 That's it! I hope you enjoyed this little overview of the codebase.
 
 If you have any questions you can get in touch with me via:
+
 e. jamenlyndon@gmail.com
+
 p. 0438 474 681
