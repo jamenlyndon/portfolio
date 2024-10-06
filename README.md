@@ -30,11 +30,11 @@ Link to GitHub and show the source code. Make sure it's neat!
 
 
 **So how did it go?**\
-Overall this project went very well and I managed to follow my guidelines for the most part. The entire thing was both designed and developed in under a week without complication or issue.
+Overall this project went pretty well and I managed to follow my guidelines for the most part. The entire thing was both designed and developed in under a week without complication or issue.
 
-I did end up using one off the shelf package, [Isotope](https://isotope.metafizzy.co/). This allowed me to do some fancy animated filtering. Writing this from scratch would have been extremely difficult and time consuming. Maybe one day...
+I did end up using one off the shelf package, [Isotope](https://isotope.metafizzy.co/). This allowed me to do some fancy animated filtering. It does feel a bit like cheating, but writing this from scratch would have been extremely difficult and time consuming. Maybe one day...
 
-The codebase came out very neat and maintainable. It's simple, maintainable, well commented, easy to read, has good separation of concerns, etc.
+The codebase is very neat. It's simple, maintainable, well commented, easy to read, has good separation of concerns, etc.
 
 The only caveat is that without a server side language to dynamically include files, I had to repeat myself in the HTML a little bit. Still, this is a small price to pay for not using Python, PHP or Node.js at all.
 
