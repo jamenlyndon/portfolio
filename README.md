@@ -9,36 +9,27 @@ Before starting on this website I decided to create a few basic guidelines for m
 
 Here's what I came up with:
 
-1. **Keep it simple.**
-
-This is a small static website, so no need to overdo the tooling.
-
-Create it using `HTML`, `SASS` and `Javascript` only.
-
+1. **Keep it simple.**\
+This is a small static website, so no need to overdo the tooling.\
+Create it using `HTML`, `SASS` and `Javascript` only.\
 Use only the required basic npm packages for compilation and minification.
 
-2. **Build everything yourself.**
-
-This website serves to showcase your skills as a developer.
-
+2. **Build everything yourself.**\
+This website serves to showcase your skills as a developer.\
 Make it from scratch and take as little off the shelf as possible.
 
-3. **Create a UI kit.**
-
+3. **Create a UI kit.**\
 Make a basic UI Kit page to show components / typography.
 
-4. **Make it cool.**
-
-Make this website a little more shiny and fun than you otherwise would.
-
+4. **Make it cool.**\
+Make this website a little more shiny and fun than you otherwise would.\
 Create some animations, easter eggs, etc.
 
-5. **Showcase your code.**
+5. **Showcase your code.**\
 Link to GitHub and show the source code. Make sure it's neat!
 
 
-**So how did it go?**
-
+**So how did it go?**\
 Overall this project went very well. I managed to the guidelines for the most part. This project was both designed and developed in under a week without complication or issue.
 
 I ended up using one off the shelf package, [Isotope](https://isotope.metafizzy.co/). This allowed me to do some fancy animated filtering. Writing this from scratch would have been extremely difficult and time consuming. Maybe one day...
@@ -47,8 +38,7 @@ The codebase came out very neat and maintainable. It's simple, maintainable, wel
 
 The only caveat is that without a server side language to dynamically include files, I had to repeat myself in the HTML a little bit. Small price to pay for not using Python or PHP at all.
 
-The UI Kit was created too. Nothing much there, just some buttons and the typography. Turned out to be quite a useful reference while developing. You can view it here:
-
+The UI Kit was created too. Nothing much there, just some buttons and the typography. Turned out to be quite a useful reference while developing. You can view it here:\
 https://jamenlyndon.com/uikit/
 
 Overall it came together well. Hopefully it will stay online in its current state for the next few years at least.
@@ -78,8 +68,8 @@ npm run watch
 ```
 
 ## Directory and file structure
-Here's an overview of the directory and file structure.
-This should help to explain where everything is and what it does.
+Here's an overview of the directory and file structure.\
+This should help to explain where everything is and what it does.\
 ```
 // SASS and compiled CSS
 --------------------------------------------------
@@ -132,10 +122,12 @@ This should help to explain where everything is and what it does.
 --------------------------------------------------
 /fonts/
 
+
 // UI Kit page
 --------------------------------------------------
 /uikit/
   index.html
+
 
 // Projects
 --------------------------------------------------
