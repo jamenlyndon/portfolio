@@ -1023,9 +1023,9 @@ section#skills {
 						}
 
 						.icon {
-							width: 58px;
-							height: 76px;
-							min-width: 58px;
+							width: 60px;
+							height: 79px;
+							min-width: 60px;
 							background-size: contain;
 							background-repeat: no-repeat;
 							text-align: center;
@@ -1079,7 +1079,7 @@ section#skills {
 
 						.text {
 							.title {
-								@include font-body-m($gap: false);
+								@include font-body-l($gap: false);
 								letter-spacing: 0.04em;
 								font-weight: $font-weight-medium;
 								padding-bottom: $gap-1-5;
