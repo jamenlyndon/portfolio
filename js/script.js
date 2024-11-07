@@ -903,7 +903,7 @@ function main_init() {
 		entryAnimations_init();
 
 		// If we're on the homepage
-		if (window.location.pathname === '' || window.location.pathname === '/') {
+		if (window.location.pathname.indexOf('/project/') === -1) {
 			// Init header
 			header_init();
 
