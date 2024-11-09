@@ -902,8 +902,8 @@ function main_init() {
 		// Init entry animations
 		entryAnimations_init();
 
-		// If we're on the homepage
-		if (window.location.pathname.indexOf('/project/') === -1) {
+		// If we're on the homepage or uikit
+		if (!document.querySelector('#projectDetail') && !document.querySelector('#uikit')) {
 			// Init header
 			header_init();
 
