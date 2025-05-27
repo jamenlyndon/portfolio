@@ -163,7 +163,5 @@ package-lock.json
 ## Wrapping up
 That's it! I hope you enjoyed this little overview of the codebase.
 
-If you have any questions you can get in touch with me via:
-
-e. jamenlyndon@gmail.com\
-p. 0438 474 681
+If you have any questions you can get in touch with me via:\
+jamenlyndon@gmail.com
