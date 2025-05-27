@@ -47,23 +47,21 @@ It came together well I feel. Hopefully it will stay online in its current state
 To develop this website locally;
 
 1. Clone the repository.
+```javascript
+git clone https://github.com/jamenlyndon/portfolio.git
+```
 
 2. Install the required npm packages:
-```
-// Browse to the cloned repo
-cd 'c:/where-you-cloned-the-reopo/'
-
-// Install
+```javascript
 npm install
 ```
-
 
 3. Compile the `SASS` and minify the `Javascript`:
 ```
 // Build once
 npm run build
 
-// Watch and build when changes happen
+// Watch and compile/minify when changes occur
 npm run watch
 ```
 
