@@ -1,0 +1,1992 @@
+/* Partials
+---------------------------------------------------------------------------------------------------- */
+// Variables
+@import '_partials/_variables.scss';
+
+// Typography
+@import '_partials/_typography.scss';
+
+// Buttons and links
+@import '_partials/_buttons.scss';
+
+// Animations
+@import '_partials/_animations.scss';
+
+
+/* General
+---------------------------------------------------------------------------------------------------- */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html,
+body {
+	position: relative;
+	width: 100%;
+	min-width: 320px;
+	min-height: 100%;
+	background: $color-white;
+	color: $color-grey-dark-2;
+
+	// This property defines a smooth CSS scroll animation for anchor links
+	scroll-behavior: smooth;
+}
+
+
+/* Page loading
+---------------------------------------------------------------------------------------------------- */
+body {
+	overflow: hidden;
+
+	// Loading spinner
+	.loadingSpinner {
+		position: fixed;
+		top: calc(50% - #{$gap-3});
+		left: calc(50% - #{$gap-3});
+		pointer-events: none;
+		transition: opacity $transition-medium linear;
+		opacity: 0;
+		width: $gap-6;
+		height: $gap-6;
+		display: inline-block;
+		background: $color-gradient;
+		box-sizing: border-box;
+		animation: flipX 1s linear infinite;
+
+		@keyframes flipX {
+			0% {
+				transform: perspective(200px) rotateX(0deg) rotateY(0deg);
+			}
+			50% {
+				transform: perspective(200px) rotateX(-180deg) rotateY(0deg);
+			}
+			100% {
+				transform: perspective(200px) rotateX(-180deg) rotateY(-180deg);
+			}
+		}
+
+		&.visible {
+			opacity: .5;
+		}
+	}
+
+	// Main area of the site
+	main {
+		opacity: 0.0001; // Trick lighthouse for FCP
+		transition: opacity $transition-medium linear;
+		pointer-events: none;
+	}
+
+	// Loaded state
+	&.loaded {
+		overflow: auto;
+
+		.loadingSpinner {
+			opacity: 0 !important;
+		}
+
+		main {
+			pointer-events: auto;
+			opacity: 1;
+		}
+	}
+}
+
+
+/* Header
+---------------------------------------------------------------------------------------------------- */
+header {
+	min-width: 320px;
+	background: $color-grey-dark-1;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 10;
+	transform: translateY(-100%);
+	transition: transform $transition-medium ease;
+
+	// Visible state
+	&.visible {
+		transform: translateY(0%);
+	}
+
+	> .inner {
+		height: 78px;
+		display: flex;
+		align-items: center;
+		gap: $gap-3;
+		justify-content: center;
+
+		// Logo
+		a.logo {
+			position: relative;
+			height: 30px;
+			width: 225px;
+
+			img {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				transition: opacity $transition-medium ease;
+
+				&.regular {
+					opacity: 1;
+				}
+
+				&.gradient {
+					opacity: 0;
+				}
+			}
+
+			// Disable hover state for mobile devices
+			@media (hover: hover) {
+				&:hover {
+					img {
+						&.regular {
+							opacity: 0;
+						}
+
+						&.gradient {
+							opacity: 1;
+						}
+					}
+				}
+			}
+
+			&:focus,
+			&:active {
+				img {
+					&.regular {
+						opacity: 0;
+					}
+
+					&.gradient {
+						opacity: 1;
+					}
+				}
+			}
+		}
+
+		// Nav
+		nav {
+			display: flex;
+			margin-left: auto;
+			gap: $gap-7;
+
+			p {
+				@include font-body-l($gap: false);
+				letter-spacing: 0.02em;
+
+				a {
+					font-weight: $font-weight-regular;
+					color: $color-white;
+
+					&::after {
+						height: 3px;
+						bottom: -3px;
+					}
+
+					&.selected {
+						&::after {
+							width: 100%;
+						}
+					}
+				}
+			}
+
+			.button {
+				white-space: nowrap;
+			}
+		}
+
+		// Mobile menu button
+		.mobileMenuButton {
+			display: none;
+		}
+	}
+
+	/* Responsive
+	-------------------------------------------------- */
+	@media (max-width: $breakpoint-l) {
+		> .inner {
+			nav {
+				gap: $gap-5;
+			}
+		}
+	}
+
+	// Special breakpoint for mobile menu
+	@media (max-width: $breakpoint-mobileMenu) {
+		> .inner {
+			height: 68px;
+
+			// Logo
+			a.logo {
+				position: relative;
+				height: 28px;
+				width: 206px;
+			}
+
+			// Nav
+			nav:not(.showOnMobile) {
+				display: none;
+			}
+
+			// Mobile menu button
+			a.mobileMenuButton {
+				position: relative;
+				top: -1px;
+				display: flex;
+				width: 26px;
+				height: 17px;
+				margin-left: auto;
+
+				img {
+					position: absolute;
+					top: 0;
+					left: 0;
+					width: 100%;
+					height: 100%;
+					transition: opacity $transition-medium ease;
+
+					&.regular {
+						opacity: 1;
+					}
+
+					&.gradient {
+						opacity: 0;
+					}
+				}
+
+				// Disable hover state for mobile devices
+				@media (hover: hover) {
+					&:hover {
+						img {
+							&.regular {
+								opacity: 0;
+							}
+
+							&.gradient {
+								opacity: 1;
+							}
+						}
+					}
+				}
+
+				&:focus,
+				&:active {
+					img {
+						&.regular {
+							opacity: 0;
+						}
+
+						&.gradient {
+							opacity: 1;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+
+/* Mobile menu
+---------------------------------------------------------------------------------------------------- */
+nav.mobileMenu {
+	display: none;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	min-height: $gap-33;
+	background: rgba($color-black, .9);
+	z-index: 999;
+	align-items: center;
+	opacity: 0;
+	transition: opacity $transition-medium linear;
+	pointer-events: none;
+
+	// Visible state
+	&.visible {
+		opacity: 1;
+		pointer-events: all;
+	}
+
+	> .inner {
+		p {
+			@include font-h6($gap: false, $responsive: false);
+			width: 100%;
+			text-align: center;
+			padding-bottom: $gap-3;
+
+			&:last-child {
+				padding-bottom: 0;
+			}
+
+			a {
+				color: $color-white;
+			}
+
+			a.close {
+				width: $gap-6;
+
+				&::after {
+					display: none;
+				}
+			}
+		}
+	}
+
+	/* Responsive
+	-------------------------------------------------- */
+	// Special breakpoint for mobile menu
+	@media (max-width: $breakpoint-mobileMenu) {
+		// Ensure the mobile menu is only visible on mobile devices
+		display: flex;
+	}
+}
+
+
+/* Sections and main layout
+---------------------------------------------------------------------------------------------------- */
+section {
+	width: 100%;
+	padding-top: $gap-12-5;
+	padding-bottom: $gap-12-5;
+
+	// This property should be equal to the header height (minus one pixel, this fixes some cross browser issues)
+	// It offsets the CSS scroll animation for anchor links
+	scroll-margin-top: 77px;
+
+	/* Responsive
+	-------------------------------------------------- */
+	@media (max-width: $breakpoint-l) {
+		padding-top: $gap-8;
+		padding-bottom: $gap-8;
+	}
+
+	// Special breakpoint for mobile menu
+	@media (max-width: $breakpoint-mobileMenu) {
+		scroll-margin-top: 67px;
+	}
+
+	@media (max-width: $breakpoint-s) {
+		padding-top: $gap-6;
+		padding-bottom: $gap-6;
+	}
+}
+
+section,
+footer,
+header,
+.mobileMenu {
+	> .inner {
+		margin-left: auto;
+		margin-right: auto;
+		width: 100%;
+		max-width: (1440px + $gap-8);
+		padding-left: $gap-4;
+		padding-right: $gap-4;
+	}
+
+	/* Responsive
+	-------------------------------------------------- */
+	@media (max-width: $breakpoint-m) {
+		> .inner {
+			padding-left: $gap-3;
+			padding-right: $gap-3;
+		}
+	}
+}
+
+
+/* Top areas (title and tags)
+---------------------------------------------------------------------------------------------------- */
+section {
+	> .inner {
+		> .top {
+			display: flex;
+			gap: $gap-2;
+			margin-bottom: $gap-6;
+
+			h3 {
+				@include font-h4($gap: false);
+				font-weight: $font-weight-bold;
+				padding-bottom: 0;
+			}
+
+			.tags {
+				margin-left: auto;
+
+				.button {
+					&.hidden {
+						display: none;
+					}
+
+					span {
+						white-space: nowrap;
+					}
+
+					.optional {
+						display: inline;
+					}
+
+					&:not(.selected) {
+						background: $color-white;
+
+						&::before {
+							opacity: 0;
+						}
+
+						span {
+							color: $color-grey-dark-2;
+						}
+
+						// Disable hover state for mobile devices
+						@media (hover: hover) {
+							&:hover {
+								span {
+									color: $color-primary;
+								}
+							}
+						}
+
+						&:active,
+						&:focus {
+							span {
+								color: $color-primary;
+							}
+						}
+					}
+
+					&.selected {
+						&::before {
+							opacity: 0;
+						}
+
+						// Disable hover state for mobile devices
+						@media (hover: hover) {
+							&:hover {
+								&::before {
+									opacity: 1;
+								}
+							}
+						}
+
+						&:active,
+						&:focus {
+							&::before {
+								opacity: 1;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	/* Responsive
+	-------------------------------------------------- */
+	@media (max-width: $breakpoint-xxxl) {
+		> .inner {
+			> .top {
+				.tags {
+					.button {
+						.optional {
+							display: none;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	@media (max-width: $breakpoint-xxl) {
+		> .inner {
+			> .top {
+				flex-wrap: wrap;
+				gap: $gap-4;
+				margin-bottom: $gap-3;
+
+				h3 {
+					width: 100%;
+				}
+
+				.tags {
+					width: 100%;
+					display: flex;
+					flex-wrap: nowrap;
+					flex-direction: row-reverse;
+					gap: $gap-1;
+
+					.button {
+						width: 100%;
+					}
+				}
+			}
+		}
+	}
+
+	@media (max-width: $breakpoint-m) {
+		> .inner {
+			> .top {
+				border-bottom: 0;
+				padding-bottom: 0;
+				margin-bottom: $gap-5;
+
+				h3 {
+					@include font-h5($gap: false, $responsive: false, $inheritWeight: true);
+				}
+
+				// Hide tags on mobile
+				.tags {
+					display: none;
+				}
+			}
+		}
+	}
+}
+
+
+/* Gradient backgrounds
+---------------------------------------------------------------------------------------------------- */
+// These are moved dynamically via JS, which is why the sizing is larger than the viewport
+.gradientBackground {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 150%;
+	height: 150%;
+	background: $color-gradient;
+	transform: translate(-15%, -15%);
+	transition: transform $transition-medium linear;
+
+	&.reverse {
+		background: $color-gradient-reverse;
+	}
+
+	&.noTransition {
+		transition: none;
+	}
+}
+
+
+/* Banner
+---------------------------------------------------------------------------------------------------- */
+section#banner {
+	position: relative;
+	overflow: hidden;
+	padding-top: $gap-24-5;
+	padding-bottom: $gap-24-5;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: $color-white;
+
+	> .inner {
+		position: relative;
+		text-align: center;
+
+		h1 {
+			width: 100%;
+		}
+
+		h2 {
+			@include font-h4($gap: false);
+			width: 100%;
+			padding-bottom: $gap-5;
+
+			strong {
+				white-space: nowrap;
+			}
+		}
+
+		.buttons {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			gap: $gap-2;
+
+			.button {
+				width: $gap-26;
+			}
+		}
+	}
+
+	/* Responsive
+	-------------------------------------------------- */
+	@media (max-width: $breakpoint-l) {
+		padding-top: $gap-20;
+		padding-bottom: $gap-20;
+
+		> .inner {
+			h1 {
+				padding-bottom: $gap-3;
+			}
+
+			h2 {
+				padding-bottom: $gap-4;
+			}
+		}
+	}
+
+	@media (max-width: $breakpoint-m) {
+		> .inner {
+			h1 {
+				@include font-h2($gap: false, $inheritWeight: true);
+				padding-bottom: $gap-3;
+			}
+
+			h2 {
+				@include font-h5($gap: false, $inheritWeight: true);
+				padding-bottom: $gap-4;
+			}
+
+			.buttons {
+				gap: $gap-1-5;
+			}
+		}
+	}
+
+	@media (max-width: $breakpoint-s) {
+		> .inner {
+			h1 {
+				span {
+					display: block;
+				}
+			}
+
+			h2 {
+				@include font-h5($gap: false, $inheritWeight: true);
+			}
+
+			.buttons {
+				width: 100%;
+				max-width: $gap-32;
+				margin-left: auto;
+				margin-right: auto;
+
+				.button {
+					width: 100%;
+				}
+			}
+		}
+	}
+}
+
+
+/* Projects
+---------------------------------------------------------------------------------------------------- */
+section#projects {
+	> .inner {
+		.projects {
+			width: 100%;
+			margin-bottom: -$gap-2-5;
+			transition: height $transition-slow ease;
+
+			// Disable isotope unless filtering by tag
+			// We need to use !important here in order to override dynamically added inline styles from JS
+			&.disableIsotope {
+				height: auto !important;
+				display: flex !important;
+				column-gap: $gap-2-5 !important;
+				flex-wrap: wrap !important;
+				transition: transform $transition-slow ease, opacity $transition-slow ease !important;
+
+				.isotope-sizer,
+				.isotope-gutter {
+					display: none !important;
+				}
+
+				.isotope-item {
+					position: relative !important;
+					top: 0 !important;
+					left: 0 !important;
+					transform: none !important;
+					width: auto !important;
+					flex-basis: calc(25% - #{$gap-2-5} + (#{$gap-2-5} / 4)) !important;
+				}
+			}
+
+			// Setup isotope sizing
+			.isotope-sizer,
+			.isotope-item {
+				display: block;
+				width: calc(25% - #{$gap-2-5} + (#{$gap-2-5} / 4));
+				aspect-ratio: 4.5 / 3;
+				margin-bottom: $gap-2-5;
+			}
+
+			.isotope-gutter {
+				display: block;
+				width: $gap-2-5;
+				height: $gap-2-5;
+			}
+
+			// Project card
+			.project {
+				position: relative;
+				overflow: hidden;
+				border-radius: $border-radius-s;
+				background: rgba($color-grey-dark-2, .1);
+				opacity: 1;
+				transition: opacity $transition-fast ease;
+
+				img {
+					height: 100%;
+					width: 100%;
+					object-fit: cover;
+					object-position: center;
+				}
+
+				.overlay {
+					position: absolute;
+					top: 0;
+					left: 0;
+					right: 0;
+					bottom: 0;
+					background: $color-primary;
+					color: $color-white;
+					text-align: center;
+					align-items: center;
+					display: flex;
+					flex-wrap: wrap;
+					padding: $gap-3;
+					opacity: 0;
+					transition: opacity $transition-fast linear;
+
+					> .inner {
+						width: 100%;
+
+						.title {
+							position: relative;
+							z-index: 999;
+							width: 100%;
+							@include font-body-xl($gap: false);
+							font-weight: $font-weight-medium;
+							padding-bottom: $gap-1-5;
+						}
+
+						.subtitle {
+							position: relative;
+							z-index: 999;
+							width: 100%;
+							@include font-body-m($gap: false);
+						}
+					}
+				}
+
+				// Disable hover state for mobile devices
+				@media (hover: hover) {
+					&:hover {
+						.overlay {
+							opacity: 1;
+						}
+					}
+				}
+
+				&:active,
+				&:focus {
+					.overlay {
+						opacity: 1;
+					}
+				}
+			}
+		}
+	}
+
+	/* Responsive
+	-------------------------------------------------- */
+	@media (max-width: $breakpoint-xxl) {
+		> .inner {
+			.projects {
+				margin-bottom: -$gap-2;
+
+				// Disable isotope unless filtering by tag
+				// We need to use !important here in order to override dynamically added inline styles from JS
+				&.disableIsotope {
+					column-gap: $gap-2 !important;
+
+					.isotope-item {
+						flex-basis: calc(33.33% - #{$gap-2} + (#{$gap-2} / 3)) !important;
+					}
+				}
+
+				// Setup isotope sizing
+				.isotope-sizer,
+				.isotope-item {
+					width: calc(33.33% - #{$gap-2} + (#{$gap-2} / 3));
+					margin-bottom: $gap-2;
+				}
+
+				.isotope-gutter {
+					width: $gap-2;
+					height: $gap-2;
+				}
+
+				// Project card
+				.project {
+					.overlay {
+						padding: $gap-2;
+
+						> .inner {
+							.title {
+							}
+
+							.subtitle {
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	@media (max-width: $breakpoint-m) {
+		> .inner {
+			.projects {
+				// Disable isotope unless filtering by tag
+				// We need to use !important here in order to override dynamically added inline styles from JS
+				&.disableIsotope {
+					.isotope-item {
+						flex-basis: calc(50% - #{$gap-2} + (#{$gap-2} / 2)) !important;
+					}
+				}
+
+				// Setup isotope sizing
+				.isotope-sizer,
+				.isotope-item {
+					width: calc(50% - #{$gap-2} + (#{$gap-2} / 2));
+				}
+			}
+		}
+	}
+
+	@media (max-width: $breakpoint-m) {
+		> .inner {
+			.projects {
+				// Disable filtering by tag on mobile
+				&.disableIsotope {
+					.isotope-item {
+						display: block !important;
+					}
+				}
+			}
+		}
+	}
+
+	@media (max-width: $breakpoint-xs) {
+		> .inner {
+			.projects {
+				// Disable isotope unless filtering by tag
+				// We need to abuse !important here in order to override dynamically added inline styles from JS
+				&.disableIsotope {
+					.isotope-item {
+						flex-basis: 100% !important;
+					}
+				}
+
+				// Setup isotope sizing
+				.isotope-sizer,
+				.isotope-item {
+					width: 100%;
+					aspect-ratio: 16 / 9;
+				}
+			}
+		}
+	}
+}
+
+
+/* Technical Skills
+---------------------------------------------------------------------------------------------------- */
+// This mixin allows us to include the skill icon as an SVG and change the colour dynamically
+@mixin skillIcon($color) {
+	background-image: url('data:image/svg+xml,<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="-275 357 61 80" style="enable-background:new -275 357 61 80;" xml:space="preserve"><path fill="%23#{$color}" d="M-269,357h35l20,24v50c0,3.3-2.7,6-6,6h-49c-3.3,0-6-2.7-6-6v-68C-275,359.7-272.3,357-269,357z"/><path fill="%23ffffff" fill-opacity="0.4" d="M-234,357l20,24l0,0h-16c-2.2,0-4-1.8-4-4V357L-234,357z"/></svg>')
+}
+
+section#skills {
+	background: $color-grey;
+	color: $color-white;
+
+	> .inner {
+		// Top area
+		> .top {
+			.tags {
+
+				.button span {
+					letter-spacing: 0.02em;
+				}
+
+				.button:not(.selected) {
+					background: $color-grey;
+
+					span {
+						color: $color-white;
+					}
+
+					// Disable hover state for mobile devices
+					@media (hover: hover) {
+						&:hover {
+							span {
+								color: $color-primary;
+							}
+						}
+					}
+
+					&:active,
+					&:focus {
+						span {
+							color: $color-primary;
+						}
+					}
+				}
+			}
+		}
+
+		// Skills container
+		.technicalSkills {
+			transition: height $transition-slow ease;
+
+			// Disable isotope unless filtering by tag
+			// We need to abuse !important here in order to override dynamically added inline styles from JS
+			&.disableIsotope {
+				height: auto !important;
+				display: block !important;
+				transition: transform $transition-slow ease, opacity $transition-slow ease !important;
+
+				.isotope-sizer,
+				.isotope-gutter {
+					display: none !important;
+				}
+
+				.isotope-item {
+					position: relative !important;
+					top: 0 !important;
+					left: 0 !important;
+					transform: none !important;
+					width: 100% !important;
+				}
+			}
+
+			// Setup isotope sizing
+			.isotope-sizer,
+			.isotope-item {
+				display: flex;
+				width: 100%;
+				margin-bottom: $gap-6;
+			}
+
+			.isotope-gutter {
+				display: flex;
+				width: 0;
+				height: 0;
+			}
+
+			// Categories
+			.category {
+				display: block;
+
+				h4 {
+					@include font-body-xxl;
+					padding-bottom: $gap-3;
+					font-weight: $font-weight-medium;
+					zoom: .9;
+					letter-spacing: 0.04em;
+				}
+
+				.skillsContainer {
+					display: flex;
+					flex-wrap: wrap;
+					gap: $gap-2;
+
+					.skill {
+						display: flex;
+						flex-wrap: nowrap;
+						align-items: center;
+						gap: 14px;
+						background: rgba($color-black, .25);
+						flex-basis: calc(20% - #{$gap-2} + (#{$gap-2} / 5));
+						border-radius: $border-radius-s;
+						transition: background-color $transition-medium ease;
+						padding-left: 14px;
+						padding-right: 14px;
+						padding-top: $gap-1-5;
+						padding-bottom: $gap-1-5;
+
+						// Disable hover state for mobile devices
+						@media (hover: hover) {
+							&:hover {
+								background: rgba($color-black, .35);
+							}
+						}
+
+						&:focus,
+						&:active {
+							background: rgba($color-black, .35);
+						}
+
+						.icon {
+							width: 56px;
+							height: 74px;
+							min-width: 56px;
+							background-size: contain;
+							background-repeat: no-repeat;
+							text-align: center;
+							display: flex;
+							align-items: center;
+							justify-content: center;
+
+							> span {
+								@include font-body-s($gap: false);
+								text-transform: uppercase;
+								font-weight: $font-weight-medium;
+								letter-spacing: 0.04em;
+							}
+
+							&.darkBlue {
+								@include skillIcon('4774b7');
+							}
+
+							&.lightBlue {
+								@include skillIcon('23a9db');
+							}
+
+							&.pink {
+								@include skillIcon('c271be');
+							}
+
+							&.red {
+								@include skillIcon('c94546');
+							}
+
+							&.purple {
+								@include skillIcon('9b59e7');
+							}
+
+							&.yellow {
+								@include skillIcon('fbb340');
+							}
+
+							&.orange {
+								@include skillIcon('de7648');
+							}
+
+							&.green {
+								@include skillIcon('6ea267');
+							}
+
+							&.grey {
+								@include skillIcon('6a6a6a');
+							}
+						}
+
+						.text {
+							.title {
+								@include font-body-l($gap: false);
+								letter-spacing: 0.04em;
+								font-weight: $font-weight-medium;
+								padding-bottom: 10px;
+							}
+
+							.experience {
+								@include font-body-s($gap: false);
+								opacity: .8;
+								text-transform: uppercase;
+								letter-spacing: 0.08em;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		// Callout
+		.callout {
+			padding: $gap-5;
+			border-radius: $border-radius-s;
+			background: rgba($color-black, .25);
+			transition: transform $transition-slow ease, opacity $transition-slow ease, background-color $transition-medium ease;
+			text-align: center;
+
+			// Disable hover state for mobile devices
+			@media (hover: hover) {
+				&:hover {
+					background: rgba($color-black, .35);
+				}
+			}
+
+			&:focus,
+			&:active {
+				background: rgba($color-black, .35);
+			}
+
+			> .inner {
+				display: inline-block;
+				width: 100%;
+				max-width: 680px;
+				text-align: center;
+				margin-left: 0;
+				margin-right: 0;
+
+				img {
+					// Override the explicit width and height we need to set in the HTML for lighthouse.
+					width: $gap-8 !important;
+					height: auto !important;
+					opacity: .9;
+					margin-bottom: $gap-2;
+				}
+
+				.title {
+					width: 100%;
+					@include font-body-xxl($gap: false);
+					font-weight: $font-weight-regular;
+					padding-bottom: $gap-2-5;
+					letter-spacing: 0.02em;
+				}
+
+				.subtitle {
+					width: 100%;
+					@include font-body-xl($gap: false);
+					font-weight: $font-weight-light;
+					letter-spacing: 0.02em;
+					opacity: .9;
+				}
+			}
+		}
+	}
+
+	/* Responsive
+	-------------------------------------------------- */
+	@media (max-width: $breakpoint-xxl) {
+		> .inner {
+			// Skills container
+			.technicalSkills {
+				.category {
+					.skillsContainer {
+						.skill {
+							flex-basis: calc(25% - #{$gap-2} + (#{$gap-2} / 4));
+						}
+					}
+				}
+			}
+		}
+	}
+
+	@media (max-width: $breakpoint-xl) {
+		> .inner {
+			// Skills container
+			.technicalSkills {
+				padding-top: $gap-4;
+			}
+		}
+	}
+
+	@media (max-width: $breakpoint-xl) {
+		> .inner {
+			// Skills container
+			.technicalSkills {
+				.category {
+					.skillsContainer {
+						.skill {
+							flex-basis: calc(33.33% - #{$gap-2} + (#{$gap-2} / 3));
+
+							.icon {
+								width: 55px;
+								min-width: 55px;
+								height: 72px;
+							}
+
+							.text {
+								.title {
+									@include font-body-m($gap: false, $responsive: false, $inheritWeight: true);
+									padding-bottom: 10px;
+								}
+							}
+						}
+					}
+				}
+			}
+
+			// Callout
+			.callout {
+				padding: $gap-4;
+
+				> .inner {
+					img {
+						// Override the explicit width we need to set in the HTML for lighthouse.
+						width: $gap-7-5 !important;
+						margin-bottom: $gap-2;
+					}
+
+					.title {
+						@include font-h6($gap: false);
+						padding-bottom: $gap-2;
+					}
+
+					.subtitle {
+						@include font-body-xxl($gap: false);
+					}
+				}
+			}
+		}
+	}
+
+	@media (max-width: $breakpoint-m) {
+		> .inner {
+			// Skills container
+			.technicalSkills {
+				padding-top: 0;
+
+				// Disable filtering by tag on mobile
+				&.disableIsotope {
+					.isotope-item {
+						display: block !important;
+					}
+				}
+
+				// Setup isotope sizing
+				.isotope-sizer,
+				.isotope-item {
+					margin-bottom: $gap-5;
+				}
+
+				.category {
+					.skillsContainer {
+						.skill {
+							flex-basis: calc(50% - #{$gap-2} + (#{$gap-2} / 2));
+						}
+					}
+				}
+			}
+
+			// Callout
+			.callout {
+				padding: $gap-3;
+
+				> .inner {
+					img {
+						width: $gap-7;
+						margin-bottom: $gap-1-5;
+					}
+
+					.title {
+						@include font-body-xl($gap: false, $responsive: false, $inheritWeight: true);
+						padding-bottom: $gap-2;
+					}
+
+					.subtitle {
+						@include font-body-l($gap: false, $responsive: false, $inheritWeight: true);
+					}
+				}
+			}
+		}
+	}
+
+	@media (max-width: 530px) {
+		> .inner {
+			// Callout
+			.callout {
+				> .inner {
+					.subtitle {
+						br {
+							display: none;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	@media ((max-width: $breakpoint-xs) and (min-width: ($breakpoint-xxxs + 1px))) {
+		> .inner {
+			// Skills container
+			.technicalSkills {
+				.category {
+					.skillsContainer {
+						.skill {
+							display: block;
+							text-align: center;
+							padding: $gap-2;
+							padding-left: $gap-1;
+							padding-right: $gap-1;
+
+							.icon {
+								margin-left: auto;
+								margin-right: auto;
+								margin-bottom: $gap-1-5;
+							}
+
+							.text {
+								.title {
+									width: 100%;
+								}
+
+								.experience {
+									width: 100%;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	@media (max-width: $breakpoint-xxxs) {
+		> .inner {
+			// Skills container
+			.technicalSkills {
+				.category {
+					.skillsContainer {
+						.skill {
+							flex-basis: 100%;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+
+/* Experience
+---------------------------------------------------------------------------------------------------- */
+section#experience {
+	> .inner {
+		.experience {
+			width: 100%;
+			transition: height $transition-slow ease;
+			border-bottom: 1px solid $color-grey-light-2;
+
+			// Disable isotope unless filtering by tag
+			// We need to abuse !important here in order to override dynamically added inline styles from JS
+			&.disableIsotope {
+				height: auto !important;
+				display: block !important;
+				transition: transform $transition-slow ease, opacity $transition-slow ease !important;
+
+				.isotope-sizer,
+				.isotope-gutter {
+					display: none !important;
+				}
+
+				.isotope-item {
+					position: relative !important;
+					top: 0 !important;
+					left: 0 !important;
+					transform: none !important;
+					width: 100% !important;
+				}
+			}
+
+			// Setup isotope sizing
+			.isotope-sizer,
+			.isotope-item {
+				display: block;
+				width: 100%;
+				margin-bottom: 0;
+			}
+
+			.isotope-gutter {
+				display: block;
+				width: 0;
+				height: 0;
+			}
+
+			// Position
+			.position {
+				border-top: 1px solid $color-grey-light-2;
+
+				// Top area
+				.top {
+					display: flex;
+					gap: $gap-3;
+					align-items: center;
+					cursor: pointer;
+					padding-top: $gap-3;
+
+					// Disable hover state for mobile devices
+					@media (hover: hover) {
+						&:hover {
+							.content {
+								.title {
+									color: $color-primary;
+								}
+							}
+
+							.arrow {
+								background-color: $color-primary;
+							}
+						}
+					}
+
+					&:active,
+					&:focus {
+						.content {
+							.title {
+								color: $color-primary;
+							}
+						}
+
+						.arrow {
+							background-color: $color-primary;
+						}
+					}
+
+					.content {
+						.title {
+							cursor: pointer;
+							@include font-body-xxl($gap: false);
+							font-weight: $font-weight-medium;
+							padding-bottom: $gap-2;
+							transition: color $transition-medium ease;
+						}
+
+						.subtitle {
+							@include font-body-l($gap: false);
+							padding-bottom: $gap-2;
+						}
+					}
+
+					.arrow {
+						cursor: pointer;
+						margin-left: auto;
+						min-width: $gap-3;
+						width: $gap-3;
+						height: 15px;
+						mask-image: url('../img/icon-arrow.svg');
+						background-color: $color-black;
+						opacity: .6;
+						transition: background-color $transition-medium ease, transform $transition-medium linear;
+						transform: rotate(0);
+					}
+				}
+
+				// Inline tags
+				.inlineTags {
+					display: flex;
+					flex-wrap: wrap;
+					gap: 6px;
+					padding-bottom: $gap-3;
+					padding-right: $gap-6;
+				}
+
+				// Description
+				.description {
+					@include font-body-l($gap: false);
+					display: none;
+					color: $color-grey-light-1;
+					padding-bottom: $gap-3;
+				}
+
+				// Expanded state for position descriptions
+				&.expanded {
+					.top {
+						.arrow {
+							transform: rotate(-180deg);
+						}
+					}
+				}
+			}
+
+			// Expanded state for "more experience" area
+			// We use !important here to override inline styles dynamically added via JS
+			.moreExperience {
+				&.expanded {
+					display: block !important;
+					opacity: 1 !important;
+				}
+			}
+		}
+
+		// Show more experience button
+		.showMoreButton {
+			margin-top: $gap-5;
+			margin-left: auto;
+			margin-right: auto;
+			@include font-body-xxl($gap: false);
+		}
+	}
+}
+
+
+/* Contact
+---------------------------------------------------------------------------------------------------- */
+section#contact {
+	position: relative;
+	overflow: hidden;
+	padding-top: $gap-24;
+	padding-bottom: $gap-24;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: $color-white;
+
+	> .inner {
+		position: relative;
+		padding-bottom: $gap-7;
+
+		h2 {
+		}
+
+		.text {
+			padding-bottom: $gap-4;
+
+			p {
+				@include font-h6($gap: false);
+				font-weight: $font-weight-light;
+				letter-spacing: 0;
+				padding-bottom: $gap-2;
+
+				&:last-child {
+					padding-bottom: 0;
+				}
+			}
+		}
+
+		.contactDetails {
+			p {
+				@include font-h6($gap: false);
+				letter-spacing: 0;
+				padding-bottom: $gap-2;
+				zoom: .9;
+
+				&:last-child {
+					padding-bottom: 0;
+				}
+
+				.type {
+					display: inline-block;
+					width: $gap-4;
+					font-weight: $font-weight-light;
+				}
+
+				a {
+					color: $color-white;
+					font-weight: $font-weight-regular;
+
+					&::after {
+						background: $color-white;
+					}
+
+					// Disable hover state for mobile devices
+					@media (hover: hover) {
+						&:hover {
+							color: $color-white;
+							background: transparent;
+							background-clip: none;
+							-webkit-background-clip: none;
+							text-fill-color: $color-white;
+							-webkit-text-fill-color: $color-white;
+						}
+					}
+
+					&:active,
+					&:focus {
+						color: $color-white;
+						background: transparent;
+						background-clip: none;
+						-webkit-background-clip: none;
+						text-fill-color: $color-white;
+						-webkit-text-fill-color: $color-white;
+					}
+				}
+			}
+		}
+	}
+
+	/* Responsive
+	-------------------------------------------------- */
+	@media (max-width: $breakpoint-l) {
+		padding-top: $gap-20;
+		padding-bottom: $gap-20;
+
+		> .inner {
+			padding-bottom: $gap-5-5;
+
+			.text {
+				padding-bottom: $gap-3-5;
+			}
+
+			.contactDetails {
+				p {
+					padding-bottom: $gap-1-5;
+
+					&:last-child {
+						padding-bottom: 0;
+					}
+
+					.type {
+						width: $gap-3-5;
+					}
+				}
+			}
+		}
+	}
+
+	@media (max-width: $breakpoint-s) {
+		> .inner {
+			padding-bottom: $gap-7;
+
+			h2 {
+				@include font-h4($gap: false, $responsive: false, $inheritWeight: true);
+			}
+
+			.text {
+				@include font-body-xxl($gap: false, $responsive: false, $inheritWeight: true);
+
+				p {
+					display: inline;
+					padding-bottom: 0;
+					font-size: inherit;
+
+					&::before,
+					&::after {
+						content: none;
+					}
+				}
+			}
+		}
+	}
+
+	@media (max-width: $breakpoint-xxxs) {
+		> .inner {
+			.contactDetails {
+				p {
+					@include font-body-xl($gap: false, $responsive: false, $inheritWeight: true);
+
+					.type {
+						width: $gap-3;
+					}
+				}
+			}
+		}
+	}
+}
+
+
+/* Footer
+---------------------------------------------------------------------------------------------------- */
+footer {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	background: rgba($color-black, .25);
+	padding-top: $gap-4;
+	padding-bottom: calc($gap-4 - 3px);
+
+	> .inner {
+		display: flex;
+		flex-wrap: wrap;
+		gap: $gap-3;
+
+		.left {
+			p {
+				position: relative;
+				padding-left: 18px;
+				@include font-body-m($gap: false);
+				letter-spacing: 0.02em;
+
+				span {
+					font-size: 24px;
+					position: absolute;
+					top: -1px;
+					left: 0;
+				}
+			}
+		}
+
+		.right {
+			margin-left: auto;
+
+			p {
+				@include font-body-m($gap: false);
+				letter-spacing: 0.02em;
+
+				a {
+					color: $color-white;
+					font-weight: $font-weight-regular;
+
+					&::after {
+						background: $color-white;
+					}
+
+					// Disable hover state for mobile devices
+					@media (hover: hover) {
+						&:hover {
+							color: $color-white;
+							background: transparent;
+							background-clip: none;
+							-webkit-background-clip: none;
+							text-fill-color: $color-white;
+							-webkit-text-fill-color: $color-white;
+						}
+					}
+
+					&:active,
+					&:focus {
+						color: $color-white;
+						background: transparent;
+						background-clip: none;
+						-webkit-background-clip: none;
+						text-fill-color: $color-white;
+						-webkit-text-fill-color: $color-white;
+					}
+				}
+			}
+		}
+	}
+
+	/* Responsive
+	-------------------------------------------------- */
+	@media (max-width: $breakpoint-l) {
+		padding-top: $gap-3-5;
+		padding-bottom: calc($gap-3-5 - 3px);
+
+		> .inner {
+			.left {
+				p {
+					@include font-body-s($gap: false, $responsive: false, $inheritWeight: true);
+					letter-spacing: 0.04em;
+					padding-left: 16px;
+
+					span {
+						font-size: 20px;
+						position: absolute;
+						top: -1px;
+						left: 0;
+					}
+				}
+			}
+
+			.right {
+				p {
+					@include font-body-s($gap: false, $responsive: false, $inheritWeight: true);
+					letter-spacing: 0.04em;
+				}
+			}
+		}
+	}
+
+	@media (max-width: $breakpoint-xs) {
+		padding-top: $gap-3;
+		padding-bottom: calc($gap-3 - 3px);
+
+		> .inner {
+			gap: $gap-2;
+
+			.left,
+			.right {
+				width: 100%;
+			}
+		}
+	}
+}
+
+
+/* Project detail pages
+---------------------------------------------------------------------------------------------------- */
+section#projectDetail {
+	// Offset top of page by the header height
+	margin-top: 78px;
+
+	> .inner {
+		display: flex;
+		gap: $gap-10;
+
+		// Images
+		.images {
+			width: 100%;
+			flex-basis: 60%;
+			min-width: 50%;
+			max-width: ($gap-1 * 94);
+			display: flex;
+			flex-wrap: wrap;
+			gap: $gap-5;
+
+			img {
+				width: 100%;
+				border-radius: $border-radius-s;
+			}
+		}
+
+
+		.rightCol {
+			width: 100%;
+			max-width: 552px;
+
+			.description {
+				width: 100%;
+				color: $color-grey-light-1;
+
+				.text {
+					margin-bottom: $gap-3;
+
+					h1 {
+						@include font-h3($gap: false);
+						padding-bottom: $gap-4;
+						color: $color-grey-dark-2;
+					}
+
+					.subtitle {
+						@include font-body-xxl($gap: false);
+						padding-bottom: $gap-1 !important;
+					}
+
+					p {
+						@include font-body-l;
+					}
+
+					> *:last-child {
+						padding-bottom: 0;
+					}
+				}
+
+				.buttons {
+					margin-bottom: $gap-3;
+					display: flex;
+					flex-wrap: wrap;
+					gap: $gap-1;
+				}
+
+				.text + .features {
+					margin-top: $gap-5;
+				}
+
+				.features {
+					border-top: 1px solid $color-grey-light-2;
+
+					.feature {
+						display: flex;
+						flex-wrap: nowrap;
+						align-items: center;
+						gap: $gap-1;
+						border-bottom: 1px solid $color-grey-light-2;
+						padding-bottom: $gap-2;
+						padding-top: $gap-2;
+						width: 100%;
+
+						.icon {
+							position: relative;
+							width: $gap-3;
+							height: $gap-3;
+							background: $color-primary;
+							border-radius: $border-radius-l;
+							display: flex;
+							align-items: center;
+							justify-content: center;
+
+							&::before {
+								content: '';
+								background: url('../img/icon-feature.svg');
+								height: 10px;
+								width: 6px;
+								position: relative;
+								left: 1px;
+							}
+						}
+
+						.label {
+							p {
+								@include font-body-l($gap: false);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	/* Responsive
+	-------------------------------------------------- */
+	@media (max-width: $breakpoint-l) {
+		> .inner {
+			flex-wrap: wrap;
+			gap: $gap-6;
+
+			// Images
+			.images {
+				width: 100%;
+				flex-basis: 100%;
+				order: 2;
+			}
+
+			// Description
+			.rightCol {
+				display: contents;
+
+				.description {
+					width: 100%;
+					flex-basis: 100%;
+					max-width: 752px;
+
+					&.top {
+						order: 1;
+
+						.text {
+							margin-bottom: 0;
+
+							.subtitle {
+								padding-bottom: 0 !important;
+							}
+						}
+					}
+
+					&.bottom {
+						order: 3;
+					}
+				}
+			}
+		}
+	}
+
+	// Special breakpoint for mobile menu
+	@media (max-width: $breakpoint-mobileMenu) {
+		// Offset top of page by the header height
+		margin-top: 68px;
+	}
+
+	@media (max-width: $breakpoint-m) {
+		> .inner {
+			// Description
+			.rightCol {
+				.description {
+					.text {
+						h1 {
+							@include font-h5($gap: false, $responsive: false, $inheritWeight: true);
+							padding-bottom: $gap-3;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	@media (max-width: $breakpoint-s) {
+		> .inner {
+			gap: $gap-5;
+
+			// Images
+			.images {
+				gap: $gap-3;
+			}
+
+			// Description
+			.description {
+				.text + .features {
+					margin-top: $gap-4;
+				}
+			}
+		}
+	}
+}

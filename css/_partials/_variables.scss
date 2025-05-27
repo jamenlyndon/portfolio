@@ -1,0 +1,165 @@
+/* Colours
+---------------------------------------------------------------------------------------------------- */
+$color-primary: #099eb4;
+$color-primary-light-1: lighten($color-primary, 3%);
+
+$color-gradient: linear-gradient(135deg, #9f57e9 25%, #00a4a7 75%);
+$color-gradient-reverse: linear-gradient(135deg, #00a4a7 30%, #9f57e9 100%);
+$color-gradient-link: linear-gradient(135deg, $color-primary 20%, #9f57e9 110%);
+
+$color-grey-light-2: #e5e5e5;
+$color-grey-light-1: #525252;
+$color-grey: #585d69;
+$color-grey-dark-1: #2a2c32;
+$color-grey-dark-2: #272727;
+
+$color-white: #ffffff;
+$color-black: #000000;
+
+
+/* Fonts
+---------------------------------------------------------------------------------------------------- */
+$font-family: 'Product Sans', sans-serif;
+
+$font-weight-black: 900;
+$font-weight-bold: 700;
+$font-weight-semiBold: 600;
+$font-weight-medium: 500;
+$font-weight-regular: 400;
+$font-weight-light: 300;
+
+
+/* Border radius
+---------------------------------------------------------------------------------------------------- */
+$border-radius-l: 9999px;
+$border-radius-m: 10px;
+$border-radius-s: 6px;
+
+
+/* Transitions
+---------------------------------------------------------------------------------------------------- */
+$transition-slow: .4s;
+$transition-medium: .2s;
+$transition-fast: .1s;
+
+
+/* Breakpoints
+---------------------------------------------------------------------------------------------------- */
+$breakpoint-xxxl: 1360px;
+$breakpoint-xxl: 1280px;
+$breakpoint-xl: 1100px;
+$breakpoint-l: 1024px;
+$breakpoint-m: 768px;
+$breakpoint-s: 640px;
+$breakpoint-xs: 540px;
+$breakpoint-xxs: 400px;
+$breakpoint-xxxs: 355px;
+
+// Special breakpoint for mobile menu
+$breakpoint-mobileMenu: 860px;
+
+
+/* Gaps
+Why is this code so terrible? Believe it or not there is no way to do this programmatically using SASS
+---------------------------------------------------------------------------------------------------- */
+$gap: 8px;
+$gap-half: calc($gap / 2);
+
+$gap-0: 0px;
+$gap-0-5: $gap-half;
+$gap-1: ($gap * 1);
+$gap-1-5: $gap-1 + $gap-half;
+$gap-2: ($gap * 2);
+$gap-2-5: $gap-2 + $gap-half;
+$gap-3: ($gap * 3);
+$gap-3-5: $gap-3 + $gap-half;
+$gap-4: ($gap * 4);
+$gap-4-5: $gap-4 + $gap-half;
+$gap-5: ($gap * 5);
+$gap-5-5: $gap-5 + $gap-half;
+$gap-6: ($gap * 6);
+$gap-6-5: $gap-6 + $gap-half;
+$gap-7: ($gap * 7);
+$gap-7-5: $gap-7 + $gap-half;
+$gap-8: ($gap * 8);
+$gap-8-5: $gap-8 + $gap-half;
+$gap-9: ($gap * 9);
+$gap-9-5: $gap-9 + $gap-half;
+$gap-10: ($gap * 10);
+$gap-10-5: $gap-10 + $gap-half;
+$gap-11: ($gap * 11);
+$gap-11-5: $gap-11 + $gap-half;
+$gap-12: ($gap * 12);
+$gap-12-5: $gap-12 + $gap-half;
+$gap-13: ($gap * 13);
+$gap-13-5: $gap-13 + $gap-half;
+$gap-14: ($gap * 14);
+$gap-14-5: $gap-14 + $gap-half;
+$gap-15: ($gap * 15);
+$gap-15-5: $gap-15 + $gap-half;
+$gap-16: ($gap * 16);
+$gap-16-5: $gap-16 + $gap-half;
+$gap-17: ($gap * 17);
+$gap-17-5: $gap-17 + $gap-half;
+$gap-18: ($gap * 18);
+$gap-18-5: $gap-18 + $gap-half;
+$gap-19: ($gap * 19);
+$gap-19-5: $gap-19 + $gap-half;
+$gap-20: ($gap * 20);
+$gap-20-5: $gap-20 + $gap-half;
+$gap-21: ($gap * 21);
+$gap-21-5: $gap-21 + $gap-half;
+$gap-22: ($gap * 22);
+$gap-22-5: $gap-22 + $gap-half;
+$gap-23: ($gap * 23);
+$gap-23-5: $gap-23 + $gap-half;
+$gap-24: ($gap * 24);
+$gap-24-5: $gap-24 + $gap-half;
+$gap-25: ($gap * 25);
+$gap-25-5: $gap-25 + $gap-half;
+$gap-26: ($gap * 26);
+$gap-26-5: $gap-26 + $gap-half;
+$gap-27: ($gap * 27);
+$gap-27-5: $gap-27 + $gap-half;
+$gap-28: ($gap * 28);
+$gap-28-5: $gap-28 + $gap-half;
+$gap-29: ($gap * 29);
+$gap-29-5: $gap-29 + $gap-half;
+$gap-30: ($gap * 30);
+$gap-30-5: $gap-30 + $gap-half;
+$gap-31: ($gap * 31);
+$gap-31-5: $gap-31 + $gap-half;
+$gap-32: ($gap * 32);
+$gap-32-5: $gap-32 + $gap-half;
+$gap-33: ($gap * 33);
+$gap-33-5: $gap-33 + $gap-half;
+$gap-34: ($gap * 34);
+$gap-34-5: $gap-34 + $gap-half;
+$gap-35: ($gap * 35);
+$gap-35-5: $gap-35 + $gap-half;
+$gap-36: ($gap * 36);
+$gap-36-5: $gap-36 + $gap-half;
+$gap-37: ($gap * 37);
+$gap-37-5: $gap-37 + $gap-half;
+$gap-38: ($gap * 38);
+$gap-38-5: $gap-38 + $gap-half;
+$gap-39: ($gap * 39);
+$gap-39-5: $gap-39 + $gap-half;
+$gap-40: ($gap * 40);
+$gap-40-5: $gap-40 + $gap-half;
+$gap-41: ($gap * 41);
+$gap-41-5: $gap-41 + $gap-half;
+$gap-42: ($gap * 42);
+$gap-42-5: $gap-42 + $gap-half;
+$gap-43: ($gap * 43);
+$gap-43-5: $gap-43 + $gap-half;
+$gap-44: ($gap * 44);
+$gap-44-5: $gap-44 + $gap-half;
+$gap-45: ($gap * 45);
+$gap-45-5: $gap-45 + $gap-half;
+$gap-46: ($gap * 46);
+$gap-46-5: $gap-46 + $gap-half;
+$gap-47: ($gap * 47);
+$gap-47-5: $gap-47 + $gap-half;
+$gap-48: ($gap * 48);
+$gap-48-5: $gap-48 + $gap-half;

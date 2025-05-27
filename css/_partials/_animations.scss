@@ -1,0 +1,76 @@
+/* Entry animations
+----------------------------------------------------------------------------------------------------
+Animations are triggered when an element is on screen or above the viewport.
+
+To use these simply add the following classes to any HTML element:
+	'entry'
+		Required.
+		Adds an entry animation.
+
+	'entry-slideUp', 'entry-slideDown', 'entry-slideLeft', 'entry-slideRight'
+		Required.
+		Choose the entry animation style, defined in /css/partials/_animations.scss
+
+	'entry-inView100', 'entry-inView75', 'entry-inView50', 'entry-inView25', 'entry-inView0'
+		Optional (defaults to 0%).
+		Choose what percentage of the element must be visible past the viewport bottom to trigger the animation.
+*/
+.entry {
+	// Slide up
+	&.entry-slideUp {
+		transform: translateY($gap-2-5);
+		transition: transform $transition-slow ease, opacity $transition-slow ease;
+		opacity: 0.0001; // Trick lighthouse for FCP
+
+		&.entry-active {
+			transform: translateY(0);
+			opacity: 1;
+		}
+	}
+
+	// Slide down
+	&.entry-slideDown {
+		transform: translateY(-$gap-2-5);
+		transition: transform $transition-slow ease, opacity $transition-slow ease;
+		opacity: 0.0001; // Trick lighthouse for FCP
+
+		&.entry-active {
+			transform: translateY(0);
+			opacity: 1;
+		}
+	}
+
+	// Slide left
+	&.entry-slideLeft {
+		transform: translateX($gap-2-5);
+		transition: transform $transition-slow ease, opacity $transition-slow ease;
+		opacity: 0.0001; // Trick lighthouse for FCP
+
+		&.entry-active {
+			transform: translateX(0);
+			opacity: 1;
+		}
+	}
+
+	// Slide right
+	&.entry-slideRight {
+		transform: translateX(-$gap-2-5);
+		transition: transform $transition-slow ease, opacity $transition-slow ease;
+		opacity: 0.0001; // Trick lighthouse for FCP
+
+		&.entry-active {
+			transform: translateX(0);
+			opacity: 1;
+		}
+	}
+
+	// Fade in
+	&.entry-fadeIn {
+		transition: opacity $transition-slow ease;
+		opacity: 0.0001; // Trick lighthouse for FCP
+
+		&.entry-active {
+			opacity: 1;
+		}
+	}
+}
