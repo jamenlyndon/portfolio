@@ -71,7 +71,7 @@ npm run watch
 Here's an overview of the directory and file structure.\
 This should help to explain where everything is and what it does.
 ```javascript
-/* SASS and compiled CSS
+/* CSS/SASS
 -------------------------------------------------- */
 /css/
   // Main SASS file
@@ -122,7 +122,7 @@ This should help to explain where everything is and what it does.
   *.woff2
 
 
-/* UI Kit page
+/* UI Kit Page
 -------------------------------------------------- */
 /uikit/
   index.html
