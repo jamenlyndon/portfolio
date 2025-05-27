@@ -429,9 +429,13 @@ To use these simply add the following classes to any HTML element:
 		Required.
 		Choose the entry animation style, defined in /css/partials/_animations.scss
 
-	'entry-inView100', 'entry-inView75', 'entry-inView50', 'entry-inView25'
+	'entry-inView100', 'entry-inView75', 'entry-inView50', 'entry-inView25', 'entry-inView0'
 		Optional (defaults to 0%).
 		Choose what percentage of the element must be visible past the viewport bottom to trigger the animation.
+
+	'entry-triggerOnLoad', 'entry-triggerOnLoadMobile'
+		Optional.
+		Trigger the animation on page load (use the mobile class to apply this only for mobile devices).
 */
 // Init
 function entryAnimations_init() {
@@ -465,8 +469,8 @@ function entryAnimations_update() {
 
 		// --------------------------------------------------
 
+		// Get the trigger on load entry animation items for mobile only
 		if (window.innerWidth <= 1024) {
-			// Get the trigger on load entry animation items for mobile
 			const entryItems_triggerOnLoadMobile = document.querySelectorAll('.entry.entry-triggerOnLoadMobile:not(.entry-triggered)');
 
 			// For each item
@@ -523,7 +527,6 @@ function entryAnimations_update() {
 				showItem = true;
 			}
 
-
 			// If we're showing the item
 			if (showItem) {
 				// Add the 'entry-triggered' class so we don't attach events more than once
@@ -543,10 +546,10 @@ function entryAnimations_update() {
 					// Reduce the delay by 200ms, as this animation is done
 					delay -= 200;
 				}, delay);
-			}
 
-			// Delay the next item by 200ms
-			delay += 200;
+				// Delay the next item by 200ms
+				delay += 200;
+			}
 		});
 
 		// -------------------------------------------------
@@ -647,6 +650,14 @@ function isotopes_init() {
 
 				// Enable this isotope
 				isotopes_enable(filterArea);
+
+				// Trigger all entry animations within this filtered area
+				// Note: this only exists to make animations look nicer during an edge case; the user filters, then shows all, then scrolls down - only some items would animate, which looks off
+				const isotopeEntryAnimations = document.querySelectorAll('#' + tagId + '.entry:not(.entry-triggered)');
+				isotopeEntryAnimations.forEach(isotopeEntryAnimation => {
+					isotopeEntryAnimation.classList.add('entry-triggered');
+					isotopeEntryAnimation.classList.add('entry-active');
+				});
 
 				// Filter this isotope (next animation frame)
 				window.requestAnimationFrame(function () {

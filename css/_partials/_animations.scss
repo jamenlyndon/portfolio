@@ -14,9 +14,14 @@ To use these simply add the following classes to any HTML element:
 	'entry-inView100', 'entry-inView75', 'entry-inView50', 'entry-inView25', 'entry-inView0'
 		Optional (defaults to 0%).
 		Choose what percentage of the element must be visible past the viewport bottom to trigger the animation.
+
+	'entry-triggerOnLoad', 'entry-triggerOnLoadMobile'
+		Optional.
+		Trigger the animation on page load (use the mobile class to apply this only for mobile devices).
 */
 .entry {
-	// Slide up
+	/* Slide up
+	-------------------------------------------------- */
 	&.entry-slideUp {
 		transform: translateY($gap-2-5);
 		transition: transform $transition-slow ease, opacity $transition-slow ease;
