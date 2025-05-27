@@ -138,9 +138,10 @@ This should help to explain where everything is and what it does.
 
     // Images for the project
     /img/
+      *.webp
 
 
-/* Other
+/* General
 -------------------------------------------------- */
 // Home page
 index.html
