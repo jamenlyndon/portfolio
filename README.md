@@ -70,17 +70,17 @@ npm run watch
 ## Directory and file structure
 Here's an overview of the directory and file structure.\
 This should help to explain where everything is and what it does.
-```
+```javascript
 /* SASS and compiled CSS
 -------------------------------------------------- */
 /css/
-  // All SASS
+  // Main SASS file
   style.scss ( -> style.css )
 
-  // Extra SASS file for the UI Kit page
+  // SASS for the UI Kit page
   uikit.scss ( -> uikit.css )
 
-  // Smaller bits of SASS
+  // Partial SASS files
   /_partials/
     // Entry animations
     _animations.scss
@@ -98,28 +98,28 @@ This should help to explain where everything is and what it does.
 /* Javascript
 -------------------------------------------------- */
 /js/
-  // All Javascript
+  // Main Javascript file
   script.js  ( -> script.min.js )
 
 
 /* Images
 -------------------------------------------------- */
 /img/
-  // The favicon in all sizes
+  // Favicon (in all sizes)
   /favicon/
 
-  // Image for social platform sharing
+  // Image for social media sharing
   social.jpg
 
   // General images
-  *.jpg
   *.svg
-  *.png
+  *.webp
 
 
 /* Fonts
 -------------------------------------------------- */
 /fonts/
+  *.woff2
 
 
 /* UI Kit page
@@ -142,6 +142,9 @@ This should help to explain where everything is and what it does.
 
 /* Other
 -------------------------------------------------- */
+// Home page
+index.html
+
 // Git ignore
 .gitignore
 
