@@ -465,6 +465,25 @@ function entryAnimations_update() {
 
 		// --------------------------------------------------
 
+		if (window.innerWidth <= 1024) {
+			// Get the trigger on load entry animation items for mobile
+			const entryItems_triggerOnLoadMobile = document.querySelectorAll('.entry.entry-triggerOnLoadMobile:not(.entry-triggered)');
+
+			// For each item
+			entryItems_triggerOnLoadMobile.forEach(item => {
+				// Add the 'entry-triggered' class so we don't attach events more than once
+				item.classList.add('entry-triggered');
+
+				// Add the 'entry-active' class to show the item
+				item.classList.add('entry-active');
+
+				// Delay other items by 200ms
+				delay = 200;
+			});
+		}
+
+		// --------------------------------------------------
+
 		// Get the untriggered entry animation items
 		const entryItems = document.querySelectorAll('.entry:not(.entry-triggered)');
 
