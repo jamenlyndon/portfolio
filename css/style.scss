@@ -92,6 +92,13 @@ body {
 			opacity: 1;
 		}
 	}
+
+	/* Responsive
+	-------------------------------------------------- */
+	// This small fix helps the website to look a lot better on smaller screens
+	@media (max-width: 1568px) {
+		zoom: .9;
+	}
 }
 
 
@@ -332,14 +339,14 @@ nav.mobileMenu {
 
 			a {
 				color: $color-white;
-			}
-
-			a.close {
-				width: $gap-6;
 
 				&::after {
 					display: none;
 				}
+			}
+
+			a.close {
+				width: $gap-6;
 			}
 		}
 	}
@@ -494,20 +501,6 @@ section {
 
 	/* Responsive
 	-------------------------------------------------- */
-	@media (max-width: $breakpoint-xxxl) {
-		> .inner {
-			> .top {
-				.tags {
-					.button {
-						.optional {
-							display: none;
-						}
-					}
-				}
-			}
-		}
-	}
-
 	@media (max-width: $breakpoint-xxl) {
 		> .inner {
 			> .top {
@@ -528,13 +521,37 @@ section {
 
 					.button {
 						width: 100%;
+
+						.optional {
+							display: none;
+						}
 					}
 				}
 			}
 		}
 	}
 
-	@media (max-width: $breakpoint-m) {
+	@media (max-width: $breakpoint-xl) {
+		> .inner {
+			> .top {
+				.tags {
+					flex-wrap: wrap;
+					justify-content: flex-start;
+					flex-direction: unset;
+
+					.button {
+						width: auto;
+
+						.optional {
+							// display: inline;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	@media (max-width: $breakpoint-mobileMenu) {
 		> .inner {
 			> .top {
 				border-bottom: 0;
@@ -543,11 +560,6 @@ section {
 
 				h3 {
 					@include font-h5($gap: false, $responsive: false, $inheritWeight: true);
-				}
-
-				// Hide tags on mobile
-				.tags {
-					display: none;
 				}
 			}
 		}
@@ -864,19 +876,6 @@ section#projects {
 				.isotope-sizer,
 				.isotope-item {
 					width: calc(50% - #{$gap-2} + (#{$gap-2} / 2));
-				}
-			}
-		}
-	}
-
-	@media (max-width: $breakpoint-m) {
-		> .inner {
-			.projects {
-				// Disable filtering by tag on mobile
-				&.disableIsotope {
-					.isotope-item {
-						display: block !important;
-					}
 				}
 			}
 		}
@@ -1245,13 +1244,6 @@ section#skills {
 			.technicalSkills {
 				padding-top: 0;
 
-				// Disable filtering by tag on mobile
-				&.disableIsotope {
-					.isotope-item {
-						display: block !important;
-					}
-				}
-
 				// Setup isotope sizing
 				.isotope-sizer,
 				.isotope-item {
@@ -1305,7 +1297,7 @@ section#skills {
 		}
 	}
 
-	@media ((max-width: $breakpoint-xs) and (min-width: ($breakpoint-xxxs + 1px))) {
+	@media ((max-width: $breakpoint-xs) and (min-width: $breakpoint-xxxs)) {
 		> .inner {
 			// Skills container
 			.technicalSkills {
@@ -1322,6 +1314,11 @@ section#skills {
 								margin-left: auto;
 								margin-right: auto;
 								margin-bottom: $gap-1-5;
+								width: 49px; 
+								min-width: 49px;
+								height: 64px;
+								background-position: center;
+								background-repeat: no-repeat;
 							}
 
 							.text {
@@ -1335,7 +1332,7 @@ section#skills {
 							}
 						}
 					}
-				}
+				} 
 			}
 		}
 	}
@@ -1348,6 +1345,18 @@ section#skills {
 					.skillsContainer {
 						.skill {
 							flex-basis: 100%;
+
+							.icon {
+								width: 49px;
+								min-width: 49px;
+								height: 64px;
+								background-position: center;
+								background-repeat: no-repeat;
+
+								span {
+									font-size: 12px;
+								}
+							}
 						}
 					}
 				}
@@ -1476,6 +1485,16 @@ section#experience {
 					gap: 6px;
 					padding-bottom: $gap-3;
 					padding-right: $gap-6;
+
+					span {
+						position: relative;
+						top: -1px;
+
+						// Fix for the zoom hack we use to make smaller screens look better
+						@media (max-width: 1568px) {
+							top: -2px;
+						}
+					}
 				}
 
 				// Description
@@ -1484,6 +1503,16 @@ section#experience {
 					display: none;
 					color: $color-grey-light-1;
 					padding-bottom: $gap-3;
+
+					strong {
+						font-weight: $font-weight-medium;
+						margin-bottom: $gap-0-5;
+						display: inline-block;
+					}
+
+					.divider {
+						opacity: .35;
+					}
 				}
 
 				// Expanded state for position descriptions

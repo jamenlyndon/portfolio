@@ -177,10 +177,16 @@ function header_init() {
 	document.addEventListener('scroll', function () {
 		// If we're not debouncing
 		if (!debounce) {
+			// Dynamically get the zoom scale from the body (defaults to 1 if not set)
+			const computedZoom = parseFloat(window.getComputedStyle(document.body).zoom) || 1;
+
+			// Scale the header height down to match the visual zoom space
+			const scaledHeaderHeight = header.offsetHeight * computedZoom;
+
 			/* Show or hide the header
 			-------------------------------------------------- */
-			// If we're scrolled past the banner
-			if ((window.scrollY + header.offsetHeight) >= banner.offsetHeight) {
+			// If we're scrolled past the banner (account for zoom on the banner height)
+			if ((window.scrollY + scaledHeaderHeight) >= (banner.offsetHeight * computedZoom)) {
 				// Show the header
 				header.classList.add('visible');
 			}
@@ -198,8 +204,8 @@ function header_init() {
 			const section_experience = document.querySelector('section#experience');
 			const section_contact = document.querySelector('section#contact');
 
-			// Get the scroll position
-			const scroll_top = window.scrollY + header.offsetHeight + 1;
+			// Get the scroll position (using the adjusted header height)
+			const scroll_top = window.scrollY + scaledHeaderHeight + 1;
 			const scroll_bottom = window.scrollY + window.innerHeight;
 
 			// Get the nav items
@@ -233,35 +239,35 @@ function header_init() {
 
 			// Contact
 			// For this section, we only check if the bottom of the contact details are fully in the viewport
-			// This is because it's at the bottom of the screen, and this provides a better UX
+			// Note: getBoundingClientRect() already includes CSS zoom scaling factors automatically!
 			const contactDetails = section_contact.querySelector('.contactDetails');
-			if (scroll_bottom >= (contactDetails.getBoundingClientRect().top + window.scrollY + contactDetails.offsetHeight)) {
+			if (scroll_bottom >= (contactDetails.getBoundingClientRect().top + window.scrollY + contactDetails.getBoundingClientRect().height)) {
 				desktopNav_contact.classList.add('selected');
 				mobileNav_contact.classList.add('selected');
 			}
 			// Experience
 			else if (
-				(scroll_top >= section_experience.offsetTop)
+				(scroll_top >= (section_experience.offsetTop * computedZoom))
 				||
-				(scroll_bottom >= (section_experience.offsetTop + section_experience.offsetHeight))
+				(scroll_bottom >= ((section_experience.offsetTop + section_experience.offsetHeight) * computedZoom))
 			) {
 				desktopNav_experience.classList.add('selected');
 				mobileNav_experience.classList.add('selected');
 			}
 			// Skills
 			else if (
-				(scroll_top >= section_skills.offsetTop)
+				(scroll_top >= (section_skills.offsetTop * computedZoom))
 				||
-				(scroll_bottom >= (section_skills.offsetTop + section_skills.offsetHeight))
+				(scroll_bottom >= ((section_skills.offsetTop + section_skills.offsetHeight) * computedZoom))
 			) {
 				desktopNav_skills.classList.add('selected');
 				mobileNav_skills.classList.add('selected');
 			}
 			// Projects
 			else if (
-				(scroll_top >= section_projects.offsetTop)
+				(scroll_top >= (section_projects.offsetTop * computedZoom))
 				||
-				(scroll_bottom >= (section_projects.offsetTop + section_projects.offsetHeight))
+				(scroll_bottom >= ((section_projects.offsetTop + section_projects.offsetHeight) * computedZoom))
 			) {
 				desktopNav_projects.classList.add('selected');
 				mobileNav_projects.classList.add('selected');
@@ -294,6 +300,7 @@ function header_init() {
 		}
 	});
 }
+
 
 
 /* Gradient backgrounds (these move based on the mouse position)
@@ -619,30 +626,35 @@ function isotopes_init() {
 		tagLinks.forEach(tagLink => {
 			// On click
 			tagLink.addEventListener('click', function () {
-				// If the tag link is already selected, don't do anything
-				if (tagLink.classList.contains('selected')) {
+				// Variable to store target tags
+				let targetTags = [];
+
+				// If the tag is selected
+				if (this.classList.contains('selected')) {
+					// Click the 'all' main tag (wait one animation frame for everything to update)
+					setTimeout(() => { this.closest('section').querySelector(".tags a.button[tag='all']").click(); }, 0);
+
+					// Don't do anything else
 					return;
 				}
+				// Otherwise, the tag is not selected
+				else {
+					// Remove the currently selected tag
+					const selectedTag = tagArea.querySelector('.selected');
+					if (selectedTag) {
+						selectedTag.classList.remove('selected');
+					}
 
-				// Remove the currently selected tag
-				const selectedTag = tagArea.querySelector('.selected');
-				if (selectedTag) {
-					selectedTag.classList.remove('selected');
-				}
-
-				// Select the clicked tag
-				if (!this.classList.contains('selected')) {
+					// Select the clicked tag
 					this.classList.add('selected');
+					targetTags = this.getAttribute('tag').replace(' ', '').split(',');
 				}
-
-				// Get the tags to show
-				const targetTags = this.getAttribute('tag').replace(' ', '').split(',');
 
 				// Create a variable to hold the filter selector query string
 				let filterString = '';
 
 				// For each tag to show, build the filter query string (but don't do this if we've selected 'all')
-				if (typeof targetTags[0] === 'undefined' || targetTags[0] !== 'all') {
+				if (typeof targetTags[0] !== 'undefined' && targetTags[0] !== 'all') {
 					targetTags.forEach(targetTag => {
 						filterString += '[tag*=' + targetTag + ']';
 					});
@@ -661,6 +673,7 @@ function isotopes_init() {
 
 				// Filter this isotope (next animation frame)
 				window.requestAnimationFrame(function () {
+					// If filterString is empty, passing empty string to Isotope shows all items
 					isotopes[tagId].arrange({ filter: filterString });
 				});
 
@@ -676,6 +689,7 @@ function isotopes_init() {
 	// Disable all isotopes to start with
 	isotopes_disableAll();
 }
+
 
 // Enable an isotope
 function isotopes_enable(filterArea) {
