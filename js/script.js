@@ -587,7 +587,6 @@ function links_init() {
 
 /* Isotopes
 ---------------------------------------------------------------------------------------------------- */
-// Init
 function isotopes_init() {
 	// Create a variable to hold our timeout
 	let disableIsotopesTimeout = setTimeout('', 1);
@@ -629,12 +628,16 @@ function isotopes_init() {
 				// Variable to store target tags
 				let targetTags = [];
 
-				// If the tag is selected
-				if (this.classList.contains('selected')) {
+				// If the tag is selected (and ensure we aren't infinitely clicking 'all' if 'all' is already selected)
+				if (this.classList.contains('selected') && this.getAttribute('tag') !== 'all') {
 					// Click the 'all' main tag (wait one animation frame for everything to update)
 					setTimeout(() => { this.closest('section').querySelector(".tags a.button[tag='all']").click(); }, 0);
 
 					// Don't do anything else
+					return;
+				}
+				// Otherwise, if the tag is 'all' and already selected, just stop to prevent click queuing loops
+				else if (this.classList.contains('selected') && this.getAttribute('tag') === 'all') {
 					return;
 				}
 				// Otherwise, the tag is not selected
@@ -689,7 +692,6 @@ function isotopes_init() {
 	// Disable all isotopes to start with
 	isotopes_disableAll();
 }
-
 
 // Enable an isotope
 function isotopes_enable(filterArea) {
