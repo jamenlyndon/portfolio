@@ -32,9 +32,9 @@ Overall this project went pretty well and I managed to follow my guidelines for 
 
 I did end up using one off the shelf package, [Isotope](https://isotope.metafizzy.co/). This allowed me to do some fancy animated filtering. It does feel a bit like cheating, but writing that feature from scratch would have been extremely difficult and time consuming. Maybe one day...
 
-The codebase is very neat. It's simple, maintainable, well commented, easy to read, has good separation of concerns, etc.
+The codebase is simple, maintainable, well commented, easy to read, has good separation of concerns, etc.
 
-The only caveat is that without a server side language to dynamically include files, I had to repeat myself in the HTML a little bit. Still, this is a small price to pay for not using Python, PHP or Node.js at all.
+The only caveat is that without a server side language to dynamically include files, I had to repeat myself in the HTML a little bit. Still, this is a small price to pay for not using a backend language.
 
 The UI Kit was created too. Nothing much there, just some buttons and the typography. Turned out to be quite a useful reference while developing. You can view it here:\
 https://jamenlyndon.com/uikit/
