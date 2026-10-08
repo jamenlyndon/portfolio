@@ -4,6 +4,7 @@ Hello and welcome to the source code of my portfolio!
 
 https://jamenlyndon.com/
 
+
 ## Overview
 Before starting on this website I decided to create a few basic guidelines for myself -
 
@@ -41,27 +42,6 @@ https://jamenlyndon.com/uikit/
 
 It came together well I feel. Hopefully it will stay online in its current state for the next few years at least.
 
-## Local development setup
-To develop this website locally;
-
-1. Clone the repository
-```bash
-git clone https://github.com/jamenlyndon/portfolio.git
-```
-
-2. Install the required npm packages
-```bash
-npm install
-```
-
-3. Compile the `SASS` and minify the `Javascript`
-```bash
-# Build once
-npm run build
-
-# Watch and compile/minify when changes occur
-npm run watch
-```
 
 ## Directory and file structure
 Here's an overview of the directory and file structure.\
@@ -110,6 +90,30 @@ This should help to explain where everything is and what it does.
         └── img/                 # Images for the project
             └── *.svg, *.webp        # Images in optimised format
 ```
+
+
+## Local development setup
+To develop this website locally -
+
+1. Clone the repository
+```bash
+git clone https://github.com/jamenlyndon/portfolio.git
+```
+
+2. Install the required npm packages
+```bash
+npm install
+```
+
+3. Compile the `SASS` and minify the `Javascript`
+```bash
+# Build once
+npm run build
+
+# Watch and compile/minify when changes occur
+npm run watch
+```
+
 
 ## Wrapping up
 That's it! I hope you enjoyed this little overview of the codebase.
