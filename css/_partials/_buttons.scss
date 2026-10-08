@@ -1,0 +1,202 @@
+/* Links
+---------------------------------------------------------------------------------------------------- */
+// Note: Unique link styling for each typography size is defined inside /css/partials/_typography.scss
+a:not(.button):not(.removeDefaultLinkStyle) {
+	position: relative;
+	display: inline-block;
+	white-space: nowrap;
+	text-decoration: none;
+	color: $color-primary;
+	transition: color $transition-medium ease;
+
+	// Light text variation
+	&.light {
+		color: $color-white;
+	}
+
+	// Underline
+	&::after {
+		content: '';
+		position: absolute;
+		left: 0;
+		width: 0;
+		background: $color-gradient-link;
+		transition: width $transition-medium ease;
+	}
+
+	// Disable hover state for mobile devices
+	@media (hover: hover) {
+		&:hover {
+			// Fallback colour for browsers that don't support text gradients
+			color: $color-primary-light-1;
+
+			// The below properties make the text a gradient
+			// Do not rely on our auto-prefixer for these properties - it doesn't seem to work correctly
+			background: $color-gradient-reverse;
+			background-clip: text;
+			-webkit-background-clip: text;
+			text-fill-color: transparent;
+			-webkit-text-fill-color: transparent;
+
+			// Underline
+			&::after {
+				width: 100%;
+			}
+		}
+	}
+
+	&:active,
+	&:focus,
+	&.selected {
+		// Fallback colour for browsers that don't support text gradients
+		color: $color-primary-light-1;
+
+		// The below properties make the text a gradient
+		// Do not rely on our auto-prefixer for these properties - it doesn't seem to work correctly
+		background: $color-gradient-reverse;
+		background-clip: text;
+		-webkit-background-clip: text;
+		text-fill-color: transparent;
+		-webkit-text-fill-color: transparent;
+
+		// Underline
+		&::after {
+			width: 100%;
+		}
+	}
+}
+
+
+/* Buttons
+---------------------------------------------------------------------------------------------------- */
+.button {
+	position: relative;
+	text-decoration: none;
+	vertical-align: top;
+	display: inline-flex;
+	align-items: center;
+	overflow: hidden;
+	text-align: center;
+	border-radius: $border-radius-l;
+	transition: background-color $transition-medium ease, border-color $transition-medium ease;
+
+	span {
+		width: 100%;
+		transition: color $transition-medium ease;
+	}
+
+
+	/* Variations
+	-------------------------------------------------- */
+	&.primary {
+		position: relative;
+		background: $color-primary;
+
+		span {
+			position: relative;
+			z-index: 1;
+			color: $color-white;
+		}
+
+		&::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			opacity: 0;
+			background: $color-gradient-link;
+			transition: opacity $transition-fast linear;
+		}
+
+		// Disable hover state for mobile devices
+		@media (hover: hover) {
+			&:hover {
+				&::before {
+					opacity: 1;
+				}
+			}
+		}
+
+		&:focus,
+		&:active,
+		&.selected {
+			&::before {
+				opacity: 1;
+			}
+		}
+	}
+
+	&.secondary {
+		border: 2px solid rgba($color-white, .6);
+		background: transparent;
+
+		span {
+			color: $color-white;
+		}
+
+		&:hover,
+		&:focus,
+		&:active,
+		&.selected {
+			background: rgba($color-white, .075);
+			border-color: rgba($color-white, .8);
+		}
+	}
+
+
+	/* Sizes
+	-------------------------------------------------- */
+	&.large {
+		padding-top: $gap-3;
+		padding-bottom: $gap-3;
+		padding-left: $gap-4;
+		padding-right: $gap-4;
+
+		span {
+			@include font-body-l($gap: false);
+			letter-spacing: 0.02em;
+		}
+
+		@media (max-width: $breakpoint-l) {
+			padding-top: $gap-2-5;
+			padding-bottom: $gap-2-5;
+			padding-left: $gap-3-5;
+			padding-right: $gap-3-5;
+		}
+	}
+
+	&.medium {
+		padding-left: $gap-2-5;
+		padding-right: $gap-2-5;
+		padding-top: $gap-1-5;
+		padding-bottom: $gap-1-5;
+
+		span {
+			@include font-body-l($gap: false);
+		}
+
+		@media (max-width: $breakpoint-l) {
+			padding-left: $gap-2;
+			padding-right: $gap-2;
+			padding-top: $gap-1-5;
+			padding-bottom: $gap-1-5;
+
+			span {
+				@include font-body-m($gap: false);
+			}
+		}
+	}
+
+	&.small {
+		padding-top: $gap-1;
+		padding-bottom: $gap-1;
+		padding-left: $gap-1-5;
+		padding-right: $gap-1-5;
+
+		span {
+			@include font-body-s($gap: false);
+		}
+	}
+}

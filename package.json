@@ -1,0 +1,18 @@
+{
+	"scripts": {
+		"watch:css": "sass --style compressed --no-source-map --watch ./css/",
+		"watch:js": "esbuild ./js/script.js --bundle --outfile=./js/script.min.js --watch --minify",
+		"watch": "concurrently \"npm run watch:css\" \"npm run watch:js\"",
+		"build:css": "sass --style compressed --no-source-map ./css/",
+		"build:js": "esbuild ./js/script.js --bundle --outfile=./js/script.min.js --minify",
+		"build": "concurrently \"npm run build:css\" \"npm run build:js\""
+	},
+	"devDependencies": {
+		"concurrently": "^9.0.1",
+		"esbuild": "^0.24.0",
+		"sass": "1.77.6"
+	},
+	"dependencies": {
+		"isotope-layout": "^3.0.6"
+	}
+}

@@ -1,0 +1,72 @@
+@import 'style.scss';
+
+// Nothing much to see here. Some very basic styling for the UI kit page (not included in the main build for performance reasons).
+
+body {
+	background: $color-grey-dark-1;
+	color: $color-white;
+	padding-top: $gap-4;
+	padding-bottom: $gap-4;
+}
+
+section {
+	padding-top: $gap-6;
+	padding-bottom:$gap-6;
+
+	@media (max-width: $breakpoint-l) {
+		padding-top: $gap-4;
+		padding-bottom:$gap-4;
+	}
+}
+
+.title {
+	&.large {
+		@include font-h1($gap: false);
+	}
+
+	&.small {
+		@include font-h6($gap: false);
+		width: 100%;
+		font-weight: $font-weight-medium;
+		border-bottom: 1px solid rgba($color-white, .2);
+		padding-bottom: $gap-3;
+		margin-bottom: $gap-3;
+	}
+}
+
+.buttons {
+	display: flex;
+	flex-wrap: wrap;
+	gap: $gap-3;
+
+	.row {
+		display: flex;
+		flex-wrap: wrap;
+		gap: $gap-1-5;
+		width: 100%;
+		flex-basis: 100%;
+	}
+}
+
+/* Uncomment the below code to debug line height of typography
+---------------------------------------------------------------------------------------------------- */
+// .divider {
+// 	width: 100%;
+// 	height: 1px;
+// 	background: red;
+
+// 	& + .divider {
+// 		margin-top: $gap-5;
+// 	}
+// }
+
+// h1,
+// h2,
+// h3,
+// h4,
+// h5,
+// h6,
+// blockquote,
+// p {
+// 	padding-bottom: 0 !important;
+// }
