@@ -463,6 +463,7 @@ To use these simply add the following classes to any HTML element:
 		Optional.
 		Trigger the animation on page load (use the mobile class to apply this only for mobile devices).
 */
+
 // Init
 function entryAnimations_init() {
 	// Delay for fade in
@@ -525,32 +526,50 @@ function entryAnimations_update() {
 		let showItem = false;
 		const viewportBottom = (window.innerHeight + window.scrollY);
 
+		/* FIX: Calculate absolute top position safely across all browsers
+		-------------------------------------------------- */
+		// Dynamically get the zoom scale from the body (defaults to 1 if not set)
+		const computedZoom = parseFloat(window.getComputedStyle(document.body).zoom) || 1;
+
+		// Loop up through parents to find the absolute unzoomed top of the item.
+		// This completely circumvents Safari's getBoundingClientRect() math bug.
+		let itemTopRaw = 0;
+		let currentEl = item;
+		while (currentEl) {
+			itemTopRaw += currentEl.offsetTop;
+			currentEl = currentEl.offsetParent;
+		}
+
+		// Apply the zoom factor to get the real absolute layout top
+		const itemAbsoluteTop = itemTopRaw * computedZoom;
+		const scaledItemHeight = item.offsetHeight * computedZoom;
+
 		// 100%
 		if (item.classList.contains('entry-inView100')) {
-			if (viewportBottom >= ((item.getBoundingClientRect().top + item.offsetHeight) + window.scrollY)) {
+			if (viewportBottom >= (itemAbsoluteTop + scaledItemHeight)) {
 				showItem = true;
 			}
 		}
 		// 75%
 		else if (item.classList.contains('entry-inView75')) {
-			if (viewportBottom >= ((item.getBoundingClientRect().top + ((item.offsetHeight / 100) * 75)) + window.scrollY)) {
+			if (viewportBottom >= (itemAbsoluteTop + ((scaledItemHeight / 100) * 75))) {
 				showItem = true;
 			}
 		}
 		// 50%
 		else if (item.classList.contains('entry-inView50')) {
-			if (viewportBottom >= ((item.getBoundingClientRect().top + ((item.offsetHeight / 100) * 50)) + window.scrollY)) {
+			if (viewportBottom >= (itemAbsoluteTop + ((scaledItemHeight / 100) * 50))) {
 				showItem = true;
 			}
 		}
 		// 25%
 		else if (item.classList.contains('entry-inView25')) {
-			if (viewportBottom >= ((item.getBoundingClientRect().top + ((item.offsetHeight / 100) * 25)) + window.scrollY)) {
+			if (viewportBottom >= (itemAbsoluteTop + ((scaledItemHeight / 100) * 25))) {
 				showItem = true;
 			}
 		}
 		// 0%
-		else if (viewportBottom >= (item.getBoundingClientRect().top + window.scrollY)) {
+		else if (viewportBottom >= itemAbsoluteTop) {
 			showItem = true;
 		}
 
@@ -561,7 +580,8 @@ function entryAnimations_update() {
 
 			// If the item is 100% ABOVE the viewport, then don't delay it - just show it straight away.
 			// This helps because the page can load already scrolled pretty far down the page.
-			if (window.scrollY > (item.getBoundingClientRect().top + window.scrollY + item.offsetHeight)) {
+			// FIX: Swapped out getBoundingClientRect layout calculation check here too
+			if (window.scrollY > (itemAbsoluteTop + scaledItemHeight)) {
 				delay = 0;
 			}
 
@@ -579,6 +599,7 @@ function entryAnimations_update() {
 		}
 	});
 }
+
 
 
 /* Links

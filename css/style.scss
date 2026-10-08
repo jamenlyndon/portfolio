@@ -1337,7 +1337,6 @@ section#experience {
 		.experience {
 			width: 100%;
 			transition: height $transition-slow ease;
-			border-bottom: 1px solid $color-grey-light-2;
 
 			// Disable isotope unless filtering by tag
 			// We need to abuse !important here in order to override dynamically added inline styles from JS
@@ -1503,6 +1502,13 @@ section#experience {
 					opacity: 1 !important;
 				}
 			}
+		}
+
+		// Bottom border
+		.bottomBorder {
+			height: 1px;
+			width: 100%;
+			background: $color-grey-light-2;
 		}
 
 		// Show more experience button
