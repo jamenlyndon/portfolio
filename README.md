@@ -75,6 +75,11 @@ This should help to explain where everything is and what it does.
 ├── favicon.ico               # The favicon in traditional .ico format
 ├── package.json              # npm packages
 │
+│
+├── js/                       # JAVASCRIPT
+│   └── script.js                # Main JS file ( -> script.min.js )
+│
+│
 ├── css/                      # STYLES
 │   ├── style.scss               # Main SASS entry point ( -> style.css )
 │   ├── uikit.scss               # UI Kit specific styles ( -> uikit.css )
@@ -84,25 +89,26 @@ This should help to explain where everything is and what it does.
 │       ├── _typography.scss        # Typography
 │       └── _variables.scss         # Variables
 │
-├── js/                       # JAVASCRIPT
-│   └── script.js                # Main JS file ( -> script.min.js )
 │
 ├── img/                      # IMAGES
 │   ├── favicon/                # Favicon (in all sizes)
 │   ├── social.jpg              # OpenGraph image for social media sharing
 │   └── *.svg, *.webp           # Images in optimised format
 │
+│
 ├── fonts/                    # FONTS
 │   └── *.woff2                 # Fonts in optimised format
+│
 │
 ├── uikit/                    # UI KIT
 │   └── index.html               # UI Kit page
 │
+│
 ├── project/                  # PROJECTS
-│   └── /some-project/           # Containing folder for each project
-│       ├── index.html           # Project page
-│       └── img/                 # Images for the project
-│          └── *.svg, *.webp        # Images in optimised format
+    └── /some-project/           # Containing folder for each project
+        ├── index.html           # Project page
+        └── img/                 # Images for the project
+            └── *.svg, *.webp        # Images in optimised format
 ```
 
 ## Wrapping up
