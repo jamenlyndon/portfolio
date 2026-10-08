@@ -466,23 +466,42 @@ To use these simply add the following classes to any HTML element:
 // Init
 function entryAnimations_init() {
 	// Delay for fade in
-	setTimeout(entryAnimations_update, 200);
+	setTimeout(() => {
+		// Run animation update function every 100ms
+		setInterval(entryAnimations_update, 100);
+	}, 200);
 }
 
 // Update
 function entryAnimations_update() {
-	// Once per animation frame
-	window.requestAnimationFrame(function () {
-		// Animation delay
-		let delay = 0;
+	// Animation delay
+	let delay = 0;
 
-		// --------------------------------------------------
+	// --------------------------------------------------
 
-		// Get the trigger on load entry animation items
-		const entryItems_triggerOnLoad = document.querySelectorAll('.entry.entry-triggerOnLoad:not(.entry-triggered)');
+	// Get the trigger on load entry animation items
+	const entryItems_triggerOnLoad = document.querySelectorAll('.entry.entry-triggerOnLoad:not(.entry-triggered)');
+
+	// For each item
+	entryItems_triggerOnLoad.forEach(item => {
+		// Add the 'entry-triggered' class so we don't attach events more than once
+		item.classList.add('entry-triggered');
+
+		// Add the 'entry-active' class to show the item
+		item.classList.add('entry-active');
+
+		// Delay other items by 200ms
+		delay = 200;
+	});
+
+	// --------------------------------------------------
+
+	// Get the trigger on load entry animation items for mobile only
+	if (window.innerWidth <= 1024) {
+		const entryItems_triggerOnLoadMobile = document.querySelectorAll('.entry.entry-triggerOnLoadMobile:not(.entry-triggered)');
 
 		// For each item
-		entryItems_triggerOnLoad.forEach(item => {
+		entryItems_triggerOnLoadMobile.forEach(item => {
 			// Add the 'entry-triggered' class so we don't attach events more than once
 			item.classList.add('entry-triggered');
 
@@ -492,96 +511,72 @@ function entryAnimations_update() {
 			// Delay other items by 200ms
 			delay = 200;
 		});
+	}
 
-		// --------------------------------------------------
+	// --------------------------------------------------
 
-		// Get the trigger on load entry animation items for mobile only
-		if (window.innerWidth <= 1024) {
-			const entryItems_triggerOnLoadMobile = document.querySelectorAll('.entry.entry-triggerOnLoadMobile:not(.entry-triggered)');
+	// Get the untriggered entry animation items
+	const entryItems = document.querySelectorAll('.entry:not(.entry-triggered)');
 
-			// For each item
-			entryItems_triggerOnLoadMobile.forEach(item => {
-				// Add the 'entry-triggered' class so we don't attach events more than once
-				item.classList.add('entry-triggered');
+	// For each item
+	entryItems.forEach(item => {
+		// Check 100%, 75%, 50%, 25%, 0% (based on classname)
+		// of the item's height past the viewport bottom to trigger showing item
+		let showItem = false;
+		const viewportBottom = (window.innerHeight + window.scrollY);
 
+		// 100%
+		if (item.classList.contains('entry-inView100')) {
+			if (viewportBottom >= ((item.getBoundingClientRect().top + item.offsetHeight) + window.scrollY)) {
+				showItem = true;
+			}
+		}
+		// 75%
+		else if (item.classList.contains('entry-inView75')) {
+			if (viewportBottom >= ((item.getBoundingClientRect().top + ((item.offsetHeight / 100) * 75)) + window.scrollY)) {
+				showItem = true;
+			}
+		}
+		// 50%
+		else if (item.classList.contains('entry-inView50')) {
+			if (viewportBottom >= ((item.getBoundingClientRect().top + ((item.offsetHeight / 100) * 50)) + window.scrollY)) {
+				showItem = true;
+			}
+		}
+		// 25%
+		else if (item.classList.contains('entry-inView25')) {
+			if (viewportBottom >= ((item.getBoundingClientRect().top + ((item.offsetHeight / 100) * 25)) + window.scrollY)) {
+				showItem = true;
+			}
+		}
+		// 0%
+		else if (viewportBottom >= (item.getBoundingClientRect().top + window.scrollY)) {
+			showItem = true;
+		}
+
+		// If we're showing the item
+		if (showItem) {
+			// Add the 'entry-triggered' class so we don't attach events more than once
+			item.classList.add('entry-triggered');
+
+			// If the item is 100% ABOVE the viewport, then don't delay it - just show it straight away.
+			// This helps because the page can load already scrolled pretty far down the page.
+			if (window.scrollY > (item.getBoundingClientRect().top + window.scrollY + item.offsetHeight)) {
+				delay = 0;
+			}
+
+			// Delay showing it by the current delay amount
+			setTimeout(function () {
 				// Add the 'entry-active' class to show the item
 				item.classList.add('entry-active');
 
-				// Delay other items by 200ms
-				delay = 200;
-			});
+				// Reduce the delay by 200ms, as this animation is done
+				delay -= 200;
+			}, delay);
+
+			// Delay the next item by 200ms
+			delay += 200;
 		}
-
-		// --------------------------------------------------
-
-		// Get the untriggered entry animation items
-		const entryItems = document.querySelectorAll('.entry:not(.entry-triggered)');
-
-		// For each item
-		entryItems.forEach(item => {
-			// Check 100%, 75%, 50%, 25%, 0% (based on classname)
-			// of the item's height past the viewport bottom to trigger showing item
-			let showItem = false;
-			const viewportBottom = (window.innerHeight + window.scrollY);
-
-			// 100%
-			if (item.classList.contains('entry-inView100')) {
-				if (viewportBottom >= ((item.getBoundingClientRect().top + item.offsetHeight) + window.scrollY)) {
-					showItem = true;
-				}
-			}
-			// 75%
-			else if (item.classList.contains('entry-inView75')) {
-				if (viewportBottom >= ((item.getBoundingClientRect().top + ((item.offsetHeight / 100) * 75)) + window.scrollY)) {
-					showItem = true;
-				}
-			}
-			// 50%
-			else if (item.classList.contains('entry-inView50')) {
-				if (viewportBottom >= ((item.getBoundingClientRect().top + ((item.offsetHeight / 100) * 50)) + window.scrollY)) {
-					showItem = true;
-				}
-			}
-			// 25%
-			else if (item.classList.contains('entry-inView25')) {
-				if (viewportBottom >= ((item.getBoundingClientRect().top + ((item.offsetHeight / 100) * 25)) + window.scrollY)) {
-					showItem = true;
-				}
-			}
-			// 0%
-			else if (viewportBottom >= (item.getBoundingClientRect().top + window.scrollY)) {
-				showItem = true;
-			}
-
-			// If we're showing the item
-			if (showItem) {
-				// Add the 'entry-triggered' class so we don't attach events more than once
-				item.classList.add('entry-triggered');
-
-				// If the item is 100% ABOVE the viewport, then don't delay it - just show it straight away.
-				// This helps because the page can load already scrolled pretty far down the page.
-				if (window.scrollY > (item.getBoundingClientRect().top + window.scrollY + item.offsetHeight)) {
-					delay = 0;
-				}
-
-				// Delay showing it by the current delay amount
-				setTimeout(function () {
-					// Add the 'entry-active' class to show the item
-					item.classList.add('entry-active');
-
-					// Reduce the delay by 200ms, as this animation is done
-					delay -= 200;
-				}, delay);
-
-				// Delay the next item by 200ms
-				delay += 200;
-			}
-		});
-
-		// -------------------------------------------------
-
-		// Call this function again to keep the animation frame loop going
-		entryAnimations_update();
 	});
 }
 
@@ -953,6 +948,11 @@ function experience_init() {
 function loading_fadeIn() {
 	// Show the page
 	document.body.classList.add('loaded');
+
+	// Allow smooth scrolling once the page fade in has completed
+	setTimeout(() => {
+		document.documentElement.style.scrollBehavior = 'smooth';
+	}, 200);
 }
 
 // Show the loading spinner
