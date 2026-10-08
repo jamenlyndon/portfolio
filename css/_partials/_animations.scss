@@ -20,8 +20,7 @@ To use these simply add the following classes to any HTML element:
 		Trigger the animation on page load (use the mobile class to apply this only for mobile devices).
 */
 .entry {
-	/* Slide up
-	-------------------------------------------------- */
+	// Slide up
 	&.entry-slideUp {
 		transform: translateY($gap-2-5);
 		transition: transform $transition-slow ease, opacity $transition-slow ease;

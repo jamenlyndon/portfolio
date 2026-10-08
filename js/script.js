@@ -440,30 +440,8 @@ function gradientBackgrounds_update(xMousePos, yMousePos) {
 }
 
 
-
-
 /* Entry animations
-----------------------------------------------------------------------------------------------------
-Animations are triggered when an element is on screen or above the viewport.
-
-To use these simply add the following classes to any HTML element:
-	'entry'
-		Required.
-		Adds an entry animation.
-
-	'entry-slideUp', 'entry-slideDown', 'entry-slideLeft', 'entry-slideRight'
-		Required.
-		Choose the entry animation style, defined in /css/partials/_animations.scss
-
-	'entry-inView100', 'entry-inView75', 'entry-inView50', 'entry-inView25', 'entry-inView0'
-		Optional (defaults to 0%).
-		Choose what percentage of the element must be visible past the viewport bottom to trigger the animation.
-
-	'entry-triggerOnLoad', 'entry-triggerOnLoadMobile'
-		Optional.
-		Trigger the animation on page load (use the mobile class to apply this only for mobile devices).
-*/
-
+---------------------------------------------------------------------------------------------------- */
 // Init
 function entryAnimations_init() {
 	// Delay for fade in
@@ -478,7 +456,6 @@ function entryAnimations_update() {
 	// Animation delay
 	let delay = 0;
 
-	// --------------------------------------------------
 
 	// Get the trigger on load entry animation items
 	const entryItems_triggerOnLoad = document.querySelectorAll('.entry.entry-triggerOnLoad:not(.entry-triggered)');
@@ -495,9 +472,8 @@ function entryAnimations_update() {
 		delay = 200;
 	});
 
-	// --------------------------------------------------
 
-	// Get the trigger on load entry animation items for mobile only
+	// Get the trigger on load entry animation items (for mobile only)
 	if (window.innerWidth <= 1024) {
 		const entryItems_triggerOnLoadMobile = document.querySelectorAll('.entry.entry-triggerOnLoadMobile:not(.entry-triggered)');
 
@@ -514,20 +490,16 @@ function entryAnimations_update() {
 		});
 	}
 
-	// --------------------------------------------------
 
 	// Get the untriggered entry animation items
 	const entryItems = document.querySelectorAll('.entry:not(.entry-triggered)');
 
 	// For each item
 	entryItems.forEach(item => {
-		// Check 100%, 75%, 50%, 25%, 0% (based on classname)
-		// of the item's height past the viewport bottom to trigger showing item
+		// Check 100%, 75%, 50%, 25%, 0% (based on classname) of the item's height past the viewport bottom to trigger showing item
 		let showItem = false;
 		const viewportBottom = (window.innerHeight + window.scrollY);
 
-		/* FIX: Calculate absolute top position safely across all browsers
-		-------------------------------------------------- */
 		// Dynamically get the zoom scale from the body (defaults to 1 if not set)
 		const computedZoom = parseFloat(window.getComputedStyle(document.body).zoom) || 1;
 
@@ -580,7 +552,6 @@ function entryAnimations_update() {
 
 			// If the item is 100% ABOVE the viewport, then don't delay it - just show it straight away.
 			// This helps because the page can load already scrolled pretty far down the page.
-			// FIX: Swapped out getBoundingClientRect layout calculation check here too
 			if (window.scrollY > (itemAbsoluteTop + scaledItemHeight)) {
 				delay = 0;
 			}
@@ -599,7 +570,6 @@ function entryAnimations_update() {
 		}
 	});
 }
-
 
 
 /* Links
