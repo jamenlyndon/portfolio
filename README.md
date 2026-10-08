@@ -5,9 +5,7 @@ Hello and welcome to the source code of my portfolio!
 https://jamenlyndon.com/
 
 ## Overview
-Before starting on this website I decided to create a few basic guidelines for myself.
-
-Here's what I came up with:
+Before starting on this website I decided to create a few basic guidelines for myself -
 
 1. **Keep it simple.**\
 This is a small static website, so no need to overdo the tooling.\
@@ -68,94 +66,43 @@ npm run watch
 ## Directory and file structure
 Here's an overview of the directory and file structure.\
 This should help to explain where everything is and what it does.
+
+
 ```
-/* CSS/SASS
--------------------------------------------------- */
-/css/
-  // Main SASS file
-  style.scss ( -> style.css )
-
-  // SASS for the UI Kit page
-  uikit.scss ( -> uikit.css )
-
-  // Partial SASS files
-  /_partials/
-    // Entry animations
-    _animations.scss
-
-    // Buttons and links
-    _buttons.scss
-
-    // Typography
-    _typography.scss
-
-    // Variables
-    _variables.scss
-
-
-/* Javascript
--------------------------------------------------- */
-/js/
-  // Main Javascript file
-  script.js  ( -> script.min.js )
-
-
-/* Images
--------------------------------------------------- */
-/img/
-  // Favicon (in all sizes)
-  /favicon/
-
-  // Image for social media sharing
-  social.jpg
-
-  // General images
-  *.svg
-  *.webp
-
-
-/* Fonts
--------------------------------------------------- */
-/fonts/
-  *.woff2
-
-
-/* UI Kit Page
--------------------------------------------------- */
-/uikit/
-  index.html
-
-
-/* Projects
--------------------------------------------------- */
-/project/
-  // Containing folder for each project
-  /some-project/
-    // The project detail page
-    index.html
-
-    // Images for the project
-    /img/
-      *.webp
-
-
-/* General
--------------------------------------------------- */
-// Home page
-index.html
-
-// Git ignore
-.gitignore
-
-// npm packages
-package.json
-package-lock.json
-
-// 404 redirect
-.htaccess
-
-// The favicon in traditional .ico format
-.favicon
+├── index.html                # Home page
+├── .gitignore                # Git ignore
+├── .htaccess                 # 404 redirect
+├── favicon.ico               # The favicon in traditional .ico format
+├── package.json              # npm packages
+│
+├── css/                      # STYLES
+│   ├── style.scss               # Main SASS entry point ( -> style.css )
+│   ├── uikit.scss               # UI Kit specific styles ( -> uikit.css )
+│   └── _partials/               # Partial SASS files
+│       ├── _animations.scss        # Entry animations
+│       ├── _buttons.scss           # Buttons and links
+│       ├── _typography.scss        # Typography
+│       └── _variables.scss         # Variables
+│
+├── js/                       # JAVASCRIPT
+│   └── script.js                # Main JS file ( -> script.min.js )
+│
+├── img/                      # IMAGES
+│   ├── favicon/                # Favicon (in all sizes)
+│   ├── social.jpg              # OpenGraph image for social media sharing
+│   └── *.svg, *.webp           # Images in optimised format
+│
+├── fonts/                    # FONTS
+│   └── *.woff2                 # Fonts in optimised format
+│
+├── uikit/                    # UI KIT
+│   └── index.html               # UI Kit page
+│
+├── project/                  # PROJECTS
+│   └── /some-project/           # Containing folder for each project
+│       ├── index.html           # Project page
+│       └── img/                 # Images for the project
+│          └── *.svg, *.webp        # Images in optimised format
 ```
 
 ## Wrapping up
