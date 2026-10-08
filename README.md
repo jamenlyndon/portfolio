@@ -45,17 +45,17 @@ It came together well I feel. Hopefully it will stay online in its current state
 To develop this website locally;
 
 1. Clone the repository
-```console
+```bash
 git clone https://github.com/jamenlyndon/portfolio.git
 ```
 
 2. Install the required npm packages
-```console
+```bash
 npm install
 ```
 
 3. Compile the `SASS` and minify the `Javascript`
-```console
+```bash
 # Build once
 npm run build
 
@@ -68,7 +68,7 @@ Here's an overview of the directory and file structure.\
 This should help to explain where everything is and what it does.
 
 
-```console
+```bash
 ├── index.html                # Home page
 ├── .gitignore                # Git ignore
 ├── .htaccess                 # 404 redirect
