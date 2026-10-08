@@ -68,7 +68,7 @@ Here's an overview of the directory and file structure.\
 This should help to explain where everything is and what it does.
 
 
-```
+```text
 ├── index.html                # Home page
 ├── .gitignore                # Git ignore
 ├── .htaccess                 # 404 redirect
