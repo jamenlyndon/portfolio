@@ -67,11 +67,18 @@
 		<meta name='twitter:url' content='https://jamenlyndon.com'>
 		<meta name='twitter:card' content='summary_large_image'>
 
+		<!-- Fonts -->
+		<link rel='preload' href='/fonts/ProductSans-Light.woff2' as='font' type='font/woff2' crossorigin>
+		<link rel='preload' href='/fonts/ProductSans-LightItalic.woff2' as='font' type='font/woff2' crossorigin>
+		<link rel='preload' href='/fonts/ProductSans-Regular.woff2' as='font' type='font/woff2' crossorigin>
+		<link rel='preload' href='/fonts/ProductSans-Medium.woff2' as='font' type='font/woff2' crossorigin>
+		<link rel='preload' href='/fonts/ProductSans-Bold.woff2' as='font' type='font/woff2' crossorigin>
+
 		<!-- CSS -->
-		<link type='text/css' rel='stylesheet' href='/css/style.css?v=1.0'>
+		<link type='text/css' rel='stylesheet' href='/css/style.css?v=1.1'>
 
 		<!-- JS -->
-		<script type='module' src='/js/script.min.js?v=1.0'></script>
+		<script type='module' src='/js/script.min.js?v=1.1'></script>
 	</head>
 	<body>
 		<!-- Loading spinner -->
@@ -86,8 +93,8 @@
 			<header>
 				<div class='inner'>
 					<a href='#' class='logo'>
-						<img src='/img/logo-white.svg' alt='Jamen Lyndon' class='regular'>
-						<img src='/img/logo-gradient.svg' alt='Jamen Lyndon' class='gradient'>
+						<img src='/img/logo-white.svg?v=1.1' alt='Jamen Lyndon' class='regular' fetchpriority='high'>
+						<img src='/img/logo-gradient.svg?v=1.1' alt='Jamen Lyndon' class='gradient' fetchpriority='high'>
 					</a> <!-- .logo -->
 
 					<nav>
@@ -98,8 +105,8 @@
 					</nav>
 
 					<a href='javascript:;' class='mobileMenuButton removeDefaultLinkStyle'>
-						<img src='/img/icon-menu-white.svg' alt='Menu' class='regular'>
-						<img src='/img/icon-menu-gradient.svg' alt='Menu' class='gradient'>
+						<img src='/img/icon-menu-white.svg?v=1.1' alt='Menu' class='regular' fetchpriority='high'>
+						<img src='/img/icon-menu-gradient.svg?v=1.1' alt='Menu' class='gradient' fetchpriority='high'>
 					</a> <!-- .mobileMenuButton -->
 				</div> <!-- .inner -->
 			</header>
@@ -157,12 +164,12 @@
 					</div> <!-- .top -->
 
 					<div class='entry entry-slideUp'>
-						<div class='projects' id='isotope-projects'>
+						<div class='projects disableIsotope' id='isotope-projects'>
 							<div class='isotope-sizer'></div>
 							<div class='isotope-gutter'></div>
 
 							<a href='/project/betashares' class='project removeDefaultLinkStyle isotope-item' tag='designsystem, wordpress'>
-								<img src='/project/betashares/img/thumb.webp' alt='Betashares'>
+								<img src='/project/betashares/img/thumb.webp?v=1.1' alt='Betashares' fetchpriority='high'>
 
 								<div class='overlay'>
 									<div class='inner'>
@@ -173,7 +180,7 @@
 							</a> <!-- .project -->
 
 							<a href='/project/storagechoice' class='project removeDefaultLinkStyle isotope-item' tag='ecommerce, uxui'>
-								<img src='/project/storagechoice/img/thumb.webp' alt='Storage Choice'>
+								<img src='/project/storagechoice/img/thumb.webp?v=1.1' alt='Storage Choice' fetchpriority='high'>
 
 								<div class='overlay'>
 									<div class='inner'>
@@ -184,7 +191,7 @@
 							</a> <!-- .project -->
 
 							<a href='/project/vorgee' class='project removeDefaultLinkStyle isotope-item' tag='wordpress, ecommerce'>
-								<img src='/project/vorgee/img/thumb.webp' alt='Vorgee'>
+								<img src='/project/vorgee/img/thumb.webp?v=1.1' alt='Vorgee' fetchpriority='high'>
 
 								<div class='overlay'>
 									<div class='inner'>
@@ -195,7 +202,7 @@
 							</a> <!-- .project -->
 
 							<a href='/project/cocreations' class='project removeDefaultLinkStyle isotope-item' tag='uxui'>
-								<img src='/project/cocreations/img/thumb.webp' alt='CoCreations'>
+								<img src='/project/cocreations/img/thumb.webp?v=1.1' alt='CoCreations' fetchpriority='high'>
 
 								<div class='overlay'>
 									<div class='inner'>
@@ -206,7 +213,7 @@
 							</a> <!-- .project -->
 
 							<a href='/project/sendcharge' class='project removeDefaultLinkStyle isotope-item' tag='software, uxui'>
-								<img src='/project/sendcharge/img/thumb.webp' alt='SendCharge'>
+								<img src='/project/sendcharge/img/thumb.webp?v=1.1' alt='SendCharge' fetchpriority='high'>
 
 								<div class='overlay'>
 									<div class='inner'>
@@ -217,7 +224,7 @@
 							</a> <!-- .project -->
 
 							<a href='/project/calypsomango' class='project removeDefaultLinkStyle isotope-item' tag='wordpress'>
-								<img src='/project/calypsomango/img/thumb.webp' alt='Calypso Mango'>
+								<img src='/project/calypsomango/img/thumb.webp?v=1.1' alt='Calypso Mango' fetchpriority='high'>
 
 								<div class='overlay'>
 									<div class='inner'>
@@ -228,7 +235,7 @@
 							</a> <!-- .project -->
 
 							<a href='/project/newfarmcinemas' class='project removeDefaultLinkStyle isotope-item' tag='wordpress, ecommerce, uxui'>
-								<img src='/project/newfarmcinemas/img/thumb.webp' alt='New Farm Cinemas'>
+								<img src='/project/newfarmcinemas/img/thumb.webp?v=1.1' alt='New Farm Cinemas' fetchpriority='high'>
 
 								<div class='overlay'>
 									<div class='inner'>
@@ -239,7 +246,7 @@
 							</a> <!-- .project -->
 
 							<a href='/project/sameboat' class='project removeDefaultLinkStyle isotope-item' tag='software'>
-								<img src='/project/sameboat/img/thumb.webp' alt='Same Boat'>
+								<img src='/project/sameboat/img/thumb.webp?v=1.1' alt='Same Boat' fetchpriority='high'>
 
 								<div class='overlay'>
 									<div class='inner'>
@@ -273,7 +280,7 @@
 						</div> <!-- .tags -->
 					</div> <!-- .top -->
 
-					<div class='technicalSkills' id='isotope-skills'>
+					<div class='technicalSkills disableIsotope' id='isotope-skills'>
 						<div class='isotope-sizer'></div>
 						<div class='isotope-gutter'></div>
 
@@ -560,7 +567,7 @@
 					================================================== -->
 					<div class='callout entry entry-slideUp'>
 						<div class='inner'>
-							<img src='/img/icon-code.webp' alt='' width='180' height='144'>
+							<img src='/img/icon-code.webp?v=1.1' alt='' width='180' height='144'>
 							<div class='title'>Using a different tech stack?</div>
 							<div class='subtitle'>Frameworks change, but core engineering principles don't.<br> Let's build using the tools best suited to your project.</div>
 						</div> <!-- .inner -->
@@ -593,7 +600,7 @@
 						</div> <!-- .tags -->
 					</div> <!-- .top -->
 
-					<div class='experience' id='isotope-experience'>
+					<div class='experience disableIsotope' id='isotope-experience'>
 						<div class='isotope-sizer'></div>
 						<div class='isotope-gutter'></div>
 

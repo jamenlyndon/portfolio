@@ -67,11 +67,18 @@
 		<meta name='twitter:url' content='https://jamenlyndon.com'>
 		<meta name='twitter:card' content='summary_large_image'>
 
+		<!-- Fonts -->
+		<link rel='preload' href='/fonts/ProductSans-Light.woff2' as='font' type='font/woff2' crossorigin>
+		<link rel='preload' href='/fonts/ProductSans-LightItalic.woff2' as='font' type='font/woff2' crossorigin>
+		<link rel='preload' href='/fonts/ProductSans-Regular.woff2' as='font' type='font/woff2' crossorigin>
+		<link rel='preload' href='/fonts/ProductSans-Medium.woff2' as='font' type='font/woff2' crossorigin>
+		<link rel='preload' href='/fonts/ProductSans-Bold.woff2' as='font' type='font/woff2' crossorigin>
+
 		<!-- CSS -->
-		<link type='text/css' rel='stylesheet' href='/css/style.css?v=1.0'>
+		<link type='text/css' rel='stylesheet' href='/css/style.css?v=1.1'>
 
 		<!-- JS -->
-		<script type='module' src='/js/script.min.js?v=1.0'></script>
+		<script type='module' src='/js/script.min.js?v=1.1'></script>
 	</head>
 	<body>
 		<!-- Loading spinner -->
@@ -86,8 +93,8 @@
 			<header class='visible'>
 				<div class='inner'>
 					<a href='/' class='logo'>
-						<img src='/img/logo-white.svg' alt='Jamen Lyndon' class='regular'>
-						<img src='/img/logo-gradient.svg' alt='Jamen Lyndon' class='gradient'>
+						<img src='/img/logo-white.svg?v=1.1' alt='Jamen Lyndon' class='regular' fetchpriority='high'>
+						<img src='/img/logo-gradient.svg?v=1.1' alt='Jamen Lyndon' class='gradient' fetchpriority='high'>
 					</a> <!-- .logo -->
 
 					<nav class='showOnMobile'>
@@ -102,10 +109,10 @@
 			<section id='projectDetail'>
 				<div class='inner'>
 					<div class='images entry entry-slideUp'>
-						<img src='/project/cocreations/img/1.webp' alt=''>
-						<img src='/project/cocreations/img/2.webp' alt=''>
-						<img src='/project/cocreations/img/3.webp' alt=''>
-						<img src='/project/cocreations/img/4.webp' alt=''>
+						<img src='/project/cocreations/img/1.webp?v=1.1' alt='' fetchpriority='high'>
+						<img src='/project/cocreations/img/2.webp?v=1.1' alt='' fetchpriority='high'>
+						<img src='/project/cocreations/img/3.webp?v=1.1' alt='' fetchpriority='high'>
+						<img src='/project/cocreations/img/4.webp?v=1.1' alt='' fetchpriority='high'>
 					</div> <!-- .images -->
 
 					<div class='rightCol'>
